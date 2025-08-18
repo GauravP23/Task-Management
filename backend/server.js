@@ -18,14 +18,19 @@ app.get('/', (req, res) => {
   res.json({ message: 'Task Management API is running!' });
 });
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB Atlas');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-  });
+// MongoDB Connection - temporarily disabled for development
+// mongoose.connect(process.env.MONGODB_URI)
+//   .then(() => {
+//     console.log('Connected to MongoDB Atlas');
+//   })
+//   .catch((error) => {
+//     console.error('MongoDB connection error:', error);
+//     console.log('Starting server without MongoDB connection for development...');
+//   });
+
+console.log('Running in development mode without MongoDB');
+
+// Start server regardless of MongoDB connection status
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

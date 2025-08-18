@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+// const User = require('../models/User'); // Temporarily disabled
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -8,55 +8,51 @@ const generateToken = (id) => {
   });
 };
 
-// Register User
+// Register User - Mock implementation
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Check if user exists
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Create user
-    const user = await User.create({
+    // Mock user creation (temporary)
+    const mockUser = {
+      _id: 'mock-user-id-' + Date.now(),
       name,
       email,
-      password,
-    });
+      role: 'member'
+    };
 
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token: generateToken(user._id),
-      });
-    } else {
-      res.status(400).json({ message: 'Invalid user data' });
-    }
+    res.status(201).json({
+      _id: mockUser._id,
+      name: mockUser.name,
+      email: mockUser.email,
+      role: mockUser.role,
+      token: generateToken(mockUser._id),
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Login User
+// Login User - Mock implementation
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check for user email
-    const user = await User.findOne({ email });
+    // Mock authentication (temporary)
+    if (email && password) {
+      const mockUser = {
+        _id: 'mock-user-id-login',
+        name: 'Test User',
+        email: email,
+        role: 'member'
+      };
 
-    if (user && (await user.comparePassword(password))) {
       res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token: generateToken(user._id),
+        _id: mockUser._id,
+        name: mockUser.name,
+        email: mockUser.email,
+        role: mockUser.role,
+        token: generateToken(mockUser._id),
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
@@ -66,11 +62,16 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Get User Profile
+// Get User Profile - Mock implementation
 const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select('-password');
-    res.json(user);
+    const mockUser = {
+      _id: 'mock-user-id-profile',
+      name: 'Test User',
+      email: 'test@example.com',
+      role: 'member'
+    };
+    res.json(mockUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
