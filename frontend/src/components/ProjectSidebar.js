@@ -28,78 +28,34 @@ import {
 
 const DRAWER_WIDTH = 280;
 
-// Mock project data
-const projects = [
-  {
-    id: 1,
-    name: 'Piper Enterprise',
-    progress: 75,
-    status: 'active',
-    color: '#2196F3',
-    members: [
-      { id: 1, name: 'Alice', avatar: 'A', color: '#FF6B6B' },
-      { id: 2, name: 'Bob', avatar: 'B', color: '#4ECDC4' },
-      { id: 3, name: 'Carol', avatar: 'C', color: '#45B7D1' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Web platform',
-    progress: 45,
-    status: 'planning',
-    color: '#4CAF50',
-    members: [
-      { id: 4, name: 'David', avatar: 'D', color: '#96CEB4' },
-      { id: 5, name: 'Eve', avatar: 'E', color: '#FECA57' },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Mobile Loop',
-    progress: 90,
-    status: 'review',
-    color: '#FF9800',
-    members: [
-      { id: 6, name: 'Frank', avatar: 'F', color: '#FF9FF3' },
-    ],
-  },
-  {
-    id: 4,
-    name: 'Win Mobile App',
-    progress: 60,
-    status: 'active',
-    color: '#9C27B0',
-    members: [
-      { id: 7, name: 'Grace', avatar: 'G', color: '#54A0FF' },
-      { id: 8, name: 'Henry', avatar: 'H', color: '#5F27CD' },
-      { id: 9, name: 'Ivy', avatar: 'I', color: '#00D2D3' },
-    ],
-  },
-];
-
+// Mock team members data (will be replaced with real data later)
 const teamMembers = [
-  { id: 1, name: 'Karen Smith', role: 'Designer', avatar: 'KS', status: 'online', color: '#FF6B6B' },
-  { id: 2, name: 'Steve McConnell', role: 'Developer', avatar: 'SM', status: 'online', color: '#4ECDC4' },
-  { id: 3, name: 'Sarah Green', role: 'PM', avatar: 'SG', status: 'away', color: '#45B7D1' },
-  { id: 4, name: 'Brad Smith', role: 'Developer', avatar: 'BS', status: 'offline', color: '#96CEB4' },
-  { id: 5, name: 'Alice Cornell', role: 'Designer', avatar: 'AC', status: 'online', color: '#FECA57' },
+  { id: 1, name: 'Karen Smith', role: 'Designer', avatar: 'KS', status: 'online', color: 'hsl(0, 68%, 70%)' },
+  { id: 2, name: 'Steve McConnell', role: 'Developer', avatar: 'SM', status: 'online', color: 'hsl(178, 68%, 70%)' },
+  { id: 3, name: 'Sarah Green', role: 'PM', avatar: 'SG', status: 'away', color: 'hsl(200, 68%, 70%)' },
+  { id: 4, name: 'Brad Smith', role: 'Developer', avatar: 'BS', status: 'offline', color: 'hsl(142, 68%, 70%)' },
+  { id: 5, name: 'Alice Cornell', role: 'Designer', avatar: 'AC', status: 'online', color: 'hsl(50, 68%, 70%)' },
 ];
 
 const statusColors = {
-  online: '#4CAF50',
-  away: '#FF9800',
-  offline: '#9E9E9E',
+  online: 'hsl(142, 68%, 55%)',
+  away: 'hsl(35, 100%, 55%)',
+  offline: 'hsl(0, 0%, 65%)',
 };
 
-const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
-  const [selectedItem, setSelectedItem] = useState('projects');
+const ProjectSidebar = ({ selectedProject, onProjectSelect, projects, setProjects }) => {
+  const [selectedItem, setSelectedItem] = useState('dashboard');
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
     { id: 'projects', label: 'Projects', icon: <ProjectIcon /> },
     { id: 'team', label: 'Team', icon: <PeopleIcon /> },
-    { id: 'time', label: 'Time', icon: <TimeIcon /> },
+    { id: 'schedule', label: 'Schedule', icon: <TimeIcon /> },
   ];
+
+  const handleProjectSelect = (project) => {
+    onProjectSelect(project);
+  };
 
   return (
     <Drawer
@@ -110,17 +66,23 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
         '& .MuiDrawer-paper': {
           width: DRAWER_WIDTH,
           boxSizing: 'border-box',
-          bgcolor: '#fafbfc',
-          borderRight: '1px solid #e0e7ff',
+          bgcolor: 'hsl(240, 40%, 98%)',
+          borderRight: '1px solid hsl(243, 100%, 94%)',
+          boxShadow: '4px 0 16px hsla(243, 82%, 67%, 0.04)',
         },
       }}
     >
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-          <Avatar sx={{ bgcolor: '#2196F3', width: 32, height: 32 }}>
+          <Avatar sx={{ 
+            bgcolor: 'hsl(243, 82%, 67%)', 
+            width: 32, 
+            height: 32,
+            boxShadow: '0 4px 16px hsla(243, 82%, 67%, 0.2)',
+          }}>
             <ProjectIcon />
           </Avatar>
-          <Typography variant="h6" fontWeight={600}>
+          <Typography variant="h6" fontWeight={600} sx={{ color: 'hsl(243, 82%, 25%)' }}>
             Projects
           </Typography>
         </Box>
@@ -135,11 +97,16 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
                 sx={{
                   borderRadius: 1,
                   mb: 0.5,
+                  color: 'hsl(243, 82%, 35%)',
                   '&.Mui-selected': {
-                    bgcolor: '#e3f2fd',
+                    bgcolor: 'hsl(243, 100%, 97%)',
+                    color: 'hsl(243, 82%, 67%)',
                     '&:hover': {
-                      bgcolor: '#e3f2fd',
+                      bgcolor: 'hsl(243, 100%, 96%)',
                     },
+                  },
+                  '&:hover': {
+                    bgcolor: 'hsl(243, 100%, 98%)',
                   },
                 }}
               >
@@ -155,15 +122,15 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
           ))}
         </List>
 
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 2, borderColor: 'hsl(243, 100%, 94%)' }} />
 
         {/* Projects Section */}
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography variant="subtitle2" fontWeight={600} color="text.secondary">
+            <Typography variant="subtitle2" fontWeight={600} sx={{ color: 'hsl(243, 82%, 55%)' }}>
               Projects
             </Typography>
-            <IconButton size="small">
+            <IconButton size="small" sx={{ color: 'hsl(243, 82%, 67%)' }}>
               <AddIcon fontSize="small" />
             </IconButton>
           </Box>
@@ -178,7 +145,11 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
                     borderRadius: 1,
                     mb: 1,
                     '&.Mui-selected': {
-                      bgcolor: '#e3f2fd',
+                      bgcolor: 'hsl(243, 100%, 97%)',
+                      border: '1px solid hsl(243, 100%, 92%)',
+                    },
+                    '&:hover': {
+                      bgcolor: 'hsl(243, 100%, 98%)',
                     },
                   }}
                 >
@@ -191,18 +162,18 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
                       <AvatarGroup max={3} sx={{ '& .MuiAvatar-root': { width: 16, height: 16, fontSize: '0.6rem' } }}>
-                        {project.members.map((member) => (
+                        {(project.members || []).map((member) => (
                           <Avatar
-                            key={member.id}
-                            sx={{ bgcolor: member.color }}
-                            title={member.name}
+                            key={member._id || member.id}
+                            sx={{ bgcolor: member.color || 'hsl(243, 82%, 67%)' }}
+                            title={member.name || member.email}
                           >
-                            {member.avatar}
+                            {(member.name || member.email)?.charAt(0).toUpperCase()}
                           </Avatar>
                         ))}
                       </AvatarGroup>
-                      <Typography variant="caption" color="text.secondary">
-                        {project.progress}%
+                      <Typography variant="caption" sx={{ color: 'hsl(243, 82%, 55%)' }}>
+                        {project.progress || 0}%
                       </Typography>
                     </Box>
                   </Box>
@@ -221,11 +192,11 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
             sx={{
               mt: 1,
               borderStyle: 'dashed',
-              color: 'text.secondary',
-              borderColor: 'grey.300',
+              color: 'hsl(243, 82%, 55%)',
+              borderColor: 'hsl(243, 100%, 88%)',
               '&:hover': {
-                borderColor: 'primary.main',
-                bgcolor: 'primary.50',
+                borderColor: 'hsl(243, 82%, 67%)',
+                bgcolor: 'hsl(243, 100%, 97%)',
               },
             }}
           >
@@ -279,7 +250,11 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect }) => {
         </Box>
 
         {/* Time Tracking Card */}
-        <Card sx={{ bgcolor: '#f8f9fa', border: '1px solid #e9ecef' }}>
+        <Card sx={{ 
+          bgcolor: 'hsl(240, 40%, 98%)', 
+          border: '1px solid hsl(243, 100%, 94%)',
+          boxShadow: '0 4px 16px hsla(243, 82%, 67%, 0.06)',
+        }}>
           <CardContent sx={{ p: 2 }}>
             <Typography variant="subtitle2" fontWeight={600} sx={{ mb: 1 }}>
               Time

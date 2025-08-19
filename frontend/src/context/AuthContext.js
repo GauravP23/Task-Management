@@ -48,8 +48,8 @@ const authReducer = (state, action) => {
 };
 
 const initialState = {
-  isAuthenticated: false,
-  user: null,
+  isAuthenticated: !!localStorage.getItem('token'),
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
   token: localStorage.getItem('token'),
   loading: false,
   error: null,
@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }) => {
       const { token, ...user } = response.data;
       
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: { user, token },
@@ -112,6 +113,7 @@ export const AuthProvider = ({ children }) => {
       const { token, ...user } = response.data;
       
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: { user, token },
@@ -127,6 +129,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
   };
 

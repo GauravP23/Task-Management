@@ -1,0 +1,265 @@
+/* Modern HSL-based CSS utilities for clean UI */
+
+/* Global improvements */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(210, 40%, 95%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(215, 20%, 65%);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(215, 20%, 55%);
+}
+
+/* Dark mode scrollbars */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: hsl(217, 33%, 17%);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: hsl(215, 19%, 35%);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: hsl(215, 19%, 45%);
+}
+
+/* Modern focus styles */
+.modern-focus:focus-visible {
+  outline: 2px solid hsl(243, 82%, 67%);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Status indicator styles */
+.status-todo {
+  color: hsl(215, 20%, 65%) !important;
+  background-color: hsl(215, 20%, 95%) !important;
+  border-color: hsl(215, 20%, 85%) !important;
+}
+
+.status-in-progress {
+  color: hsl(217, 91%, 60%) !important;
+  background-color: hsl(217, 91%, 95%) !important;
+  border-color: hsl(217, 91%, 85%) !important;
+}
+
+.status-review {
+  color: hsl(38, 92%, 50%) !important;
+  background-color: hsl(38, 92%, 95%) !important;
+  border-color: hsl(38, 92%, 85%) !important;
+}
+
+.status-done {
+  color: hsl(158, 76%, 39%) !important;
+  background-color: hsl(158, 76%, 95%) !important;
+  border-color: hsl(158, 76%, 85%) !important;
+}
+
+/* Priority styles */
+.priority-low {
+  color: hsl(215, 20%, 65%) !important;
+  background-color: hsl(215, 20%, 95%) !important;
+}
+
+.priority-medium {
+  color: hsl(38, 92%, 50%) !important;
+  background-color: hsl(38, 92%, 95%) !important;
+}
+
+.priority-high {
+  color: hsl(25, 95%, 53%) !important;
+  background-color: hsl(25, 95%, 95%) !important;
+}
+
+.priority-urgent {
+  color: hsl(0, 84%, 60%) !important;
+  background-color: hsl(0, 84%, 95%) !important;
+}
+
+/* Modern glassmorphism effects */
+.glass-effect {
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid hsla(0, 0%, 100%, 0.2);
+}
+
+[data-theme="dark"] .glass-effect {
+  background: hsla(217, 33%, 17%, 0.8);
+  border: 1px solid hsla(215, 19%, 35%, 0.2);
+}
+
+/* Modern animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px hsla(220, 25%, 10%, 0.08), 0 6px 12px -2px hsla(220, 25%, 10%, 0.08);
+}
+
+[data-theme="dark"] .hover-lift:hover {
+  box-shadow: 0 8px 16px -4px hsla(220, 25%, 5%, 0.2), 0 6px 12px -2px hsla(220, 25%, 5%, 0.2);
+}
+
+/* Modern gradient backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(243, 82%, 72%) 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, hsl(330, 85%, 60%) 0%, hsl(330, 85%, 65%) 100%);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, hsl(158, 76%, 39%) 0%, hsl(158, 76%, 44%) 100%);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, hsl(38, 92%, 50%) 0%, hsl(38, 92%, 55%) 100%);
+}
+
+.gradient-error {
+  background: linear-gradient(135deg, hsl(0, 84%, 60%) 0%, hsl(0, 84%, 65%) 100%);
+}
+
+/* Typography enhancements */
+.text-gradient {
+  background: linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(330, 85%, 60%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* Modern border utilities */
+.border-modern {
+  border: 1px solid hsl(214, 32%, 91%);
+}
+
+[data-theme="dark"] .border-modern {
+  border-color: hsl(215, 25%, 27%);
+}
+
+.border-primary {
+  border: 1px solid hsl(243, 82%, 67%);
+}
+
+.border-radius-modern {
+  border-radius: 12px;
+}
+
+.border-radius-small {
+  border-radius: 6px;
+}
+
+.border-radius-large {
+  border-radius: 16px;
+}
+
+/* Spacing utilities with clean proportions */
+.space-modern {
+  gap: 12px;
+}
+
+.space-small {
+  gap: 6px;
+}
+
+.space-large {
+  gap: 24px;
+}
+
+/* Modern shadows with HSL */
+.shadow-sm {
+  box-shadow: 0 1px 3px 0 hsla(220, 25%, 10%, 0.08), 0 1px 2px -1px hsla(220, 25%, 10%, 0.08);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px hsla(220, 25%, 10%, 0.08), 0 2px 4px -2px hsla(220, 25%, 10%, 0.08);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px hsla(220, 25%, 10%, 0.08), 0 4px 6px -4px hsla(220, 25%, 10%, 0.08);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px hsla(220, 25%, 10%, 0.08), 0 8px 10px -6px hsla(220, 25%, 10%, 0.08);
+}
+
+[data-theme="dark"] .shadow-sm {
+  box-shadow: 0 1px 3px 0 hsla(220, 25%, 5%, 0.2), 0 1px 2px -1px hsla(220, 25%, 5%, 0.2);
+}
+
+[data-theme="dark"] .shadow-md {
+  box-shadow: 0 4px 6px -1px hsla(220, 25%, 5%, 0.2), 0 2px 4px -2px hsla(220, 25%, 5%, 0.2);
+}
+
+[data-theme="dark"] .shadow-lg {
+  box-shadow: 0 10px 15px -3px hsla(220, 25%, 5%, 0.2), 0 4px 6px -4px hsla(220, 25%, 5%, 0.2);
+}
+
+[data-theme="dark"] .shadow-xl {
+  box-shadow: 0 20px 25px -5px hsla(220, 25%, 5%, 0.2), 0 8px 10px -6px hsla(220, 25%, 5%, 0.2);
+}

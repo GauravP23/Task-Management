@@ -14,23 +14,22 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/comments', require('./routes/comments'));
 
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Task Management API is running!' });
 });
 
-// MongoDB Connection - temporarily disabled for development
-// mongoose.connect(process.env.MONGODB_URI)
-//   .then(() => {
-//     console.log('Connected to MongoDB Atlas');
-//   })
-//   .catch((error) => {
-//     console.error('MongoDB connection error:', error);
-//     console.log('Starting server without MongoDB connection for development...');
-//   });
-
-console.log('Running in development mode without MongoDB');
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+    console.log('Starting server without MongoDB connection for development...');
+  });
 
 // Start server regardless of MongoDB connection status
 app.listen(PORT, () => {

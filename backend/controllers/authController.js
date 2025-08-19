@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-// const User = require('../models/User'); // Temporarily disabled
+const User = require('../models/User');
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -8,71 +8,96 @@ const generateToken = (id) => {
   });
 };
 
-// Register User - Mock implementation
+// Register User
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Mock user creation (temporary)
-    const mockUser = {
-      _id: 'mock-user-id-' + Date.now(),
+    // Check if user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: 'User already exists with this email' });
+    }
+
+    // Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Please provide name, email, and password' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+    }
+
+    // Create user
+    const user = await User.create({
       name,
       email,
-      role: 'member'
-    };
+      password,
+    });
 
     res.status(201).json({
-      _id: mockUser._id,
-      name: mockUser.name,
-      email: mockUser.email,
-      role: mockUser.role,
-      token: generateToken(mockUser._id),
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: generateToken(user._id),
     });
   } catch (error) {
+    console.error('Registration error:', error);
     res.status(500).json({ message: error.message });
   }
 };
 
-// Login User - Mock implementation
+// Login User
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Mock authentication (temporary)
-    if (email && password) {
-      const mockUser = {
-        _id: 'mock-user-id-login',
-        name: 'Test User',
-        email: email,
-        role: 'member'
-      };
-
-      res.json({
-        _id: mockUser._id,
-        name: mockUser.name,
-        email: mockUser.email,
-        role: mockUser.role,
-        token: generateToken(mockUser._id),
-      });
-    } else {
-      res.status(401).json({ message: 'Invalid email or password' });
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
     }
+
+    // Check if user exists
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Check if password is correct
+    const isPasswordValid = await user.comparePassword(password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Check if user is active
+    if (!user.isActive) {
+      return res.status(401).json({ message: 'Account has been deactivated' });
+    }
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: generateToken(user._id),
+    });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ message: error.message });
   }
 };
 
-// Get User Profile - Mock implementation
+// Get User Profile
 const getUserProfile = async (req, res) => {
   try {
-    const mockUser = {
-      _id: 'mock-user-id-profile',
-      name: 'Test User',
-      email: 'test@example.com',
-      role: 'member'
-    };
-    res.json(mockUser);
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
   } catch (error) {
+    console.error('Profile error:', error);
     res.status(500).json({ message: error.message });
   }
 };

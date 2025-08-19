@@ -1,0 +1,41 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "description": "Full-stack Task Management Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "./start-services.sh",
+    "dev": "./dev.sh",
+    "stop": "./stop-services.sh",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "clean": "npm run clean:backend && npm run clean:frontend",
+    "clean:backend": "cd backend && npm run clean",
+    "clean:frontend": "cd frontend && npm run clean",
+    "logs:backend": "tail -f logs/backend.log",
+    "logs:frontend": "tail -f logs/frontend.log",
+    "setup": "npm run install:all && chmod +x *.sh"
+  },
+  "keywords": [
+    "task-management",
+    "kanban",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

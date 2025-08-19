@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -12,6 +12,12 @@ import {
   LinearProgress,
   Menu,
   MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import {
   MoreVert as MoreVertIcon,
@@ -19,11 +25,14 @@ import {
   Schedule as ScheduleIcon,
   Comment as CommentIcon,
   Attachment as AttachmentIcon,
+  Delete as DeleteIcon,
+  Edit as EditIcon,
 } from '@mui/icons-material';
 import { DndContext, closestCenter, DragOverlay, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import CreateTaskModal from './CreateTaskModal';
+import { tasksAPI } from '../utils/api';
 
 // Mock data for demonstration
 const mockTasks = {
@@ -51,121 +60,117 @@ const mockTasks = {
       stage: 'Design',
       progress: 0,
       assignees: [
-        { id: 3, name: 'Sarah Green', avatar: 'SG', color: '#45B7D1' },
+        { id: 3, name: 'John Doe', avatar: 'JD', color: '#95E1D3' },
       ],
       comments: 1,
-      attachments: 3,
-      dueDate: '2025-08-22',
+      attachments: 2,
+      dueDate: '2025-08-28',
     },
   ],
   'in-progress': [
     {
       id: '3',
-      title: 'Customer Journey Mapping',
-      description: 'Map the customer journey and develop strategies to improve the overall customer experience',
+      title: 'User research',
+      description: 'Conduct user interviews and analyze feedback',
       priority: 'high',
-      stage: 'UX design',
-      progress: 45,
+      stage: 'Research',
+      progress: 65,
       assignees: [
-        { id: 4, name: 'Brad Smith', avatar: 'BS', color: '#96CEB4' },
-        { id: 5, name: 'Alice Cornell', avatar: 'AC', color: '#FECA57' },
+        { id: 4, name: 'Alice Johnson', avatar: 'AJ', color: '#FFE66D' },
+        { id: 5, name: 'Bob Wilson', avatar: 'BW', color: '#FF8B94' },
       ],
-      comments: 4,
+      comments: 5,
       attachments: 1,
-      dueDate: '2025-08-20',
-    },
-    {
-      id: '4',
-      title: 'Persona development',
-      description: 'Create user personas based on research data',
-      priority: 'medium',
-      stage: 'UX design',
-      progress: 70,
-      assignees: [
-        { id: 6, name: 'Mike Johnson', avatar: 'MJ', color: '#FF9FF3' },
-      ],
-      comments: 2,
-      attachments: 2,
-      dueDate: '2025-08-23',
+      dueDate: '2025-08-30',
     },
   ],
   'review': [
     {
-      id: '5',
-      title: 'Competitor research',
-      description: 'Analyze competitors and their strategies',
-      priority: 'low',
-      stage: 'UX design',
+      id: '4',
+      title: 'Design system',
+      description: 'Create comprehensive design system documentation',
+      priority: 'medium',
+      stage: 'Design',
       progress: 90,
       assignees: [
-        { id: 7, name: 'Emma Wilson', avatar: 'EW', color: '#54A0FF' },
-        { id: 8, name: 'John Doe', avatar: 'JD', color: '#5F27CD' },
+        { id: 6, name: 'Emma Davis', avatar: 'ED', color: '#A8E6CF' },
       ],
-      comments: 0,
-      attachments: 1,
-      dueDate: '2025-08-19',
+      comments: 3,
+      attachments: 3,
+      dueDate: '2025-09-01',
     },
   ],
   'done': [
     {
-      id: '6',
-      title: 'Branding, visual identity',
-      description: 'Develop visual identity including logo, typography, color palettes',
+      id: '5',
+      title: 'Project kickoff',
+      description: 'Initial project meeting and requirements gathering',
       priority: 'high',
-      stage: 'Branding',
+      stage: 'Planning',
       progress: 100,
       assignees: [
-        { id: 9, name: 'Lisa Brown', avatar: 'LB', color: '#00D2D3' },
+        { id: 7, name: 'Mike Brown', avatar: 'MB', color: '#FFB3BA' },
       ],
-      comments: 3,
-      attachments: 0,
-      dueDate: '2025-08-18',
-    },
-    {
-      id: '7',
-      title: 'Marketing materials',
-      description: 'Create a template materials such as documents, presentations and social media graphics',
-      priority: 'medium',
-      stage: 'Branding',
-      progress: 100,
-      assignees: [
-        { id: 10, name: 'Tom Davis', avatar: 'TD', color: '#FF7675' },
-      ],
-      comments: 5,
-      attachments: 2,
-      dueDate: '2025-08-17',
+      comments: 8,
+      attachments: 5,
+      dueDate: '2025-08-20',
     },
   ],
 };
 
-const priorityColors = {
-  high: '#FF6B6B',
-  medium: '#FFE66D',
-  low: '#4ECDC4',
+// Priority colors
+const getPriorityColor = (priority) => {
+  switch (priority) {
+    case 'urgent': return 'hsl(0, 84%, 60%)'; // Clean red for urgent
+    case 'high': return 'hsl(25, 95%, 53%)'; // Orange for high priority
+    case 'medium': return 'hsl(38, 92%, 50%)'; // Warm amber for medium
+    case 'low': return 'hsl(215, 20%, 65%)'; // Muted gray for low
+    default: return 'hsl(215, 20%, 65%)'; // Default to low priority color
+  }
 };
 
-const TaskCard = ({ task }) => {
+const getPriorityBgColor = (priority) => {
+  switch (priority) {
+    case 'urgent': return 'hsl(0, 84%, 95%)';
+    case 'high': return 'hsl(25, 95%, 95%)';
+    case 'medium': return 'hsl(38, 92%, 95%)';
+    case 'low': return 'hsl(215, 20%, 95%)';
+    default: return 'hsl(215, 20%, 95%)';
+  }
+};
+
+// Task Card Component
+const TaskCard = ({ task, onDelete, isDragging = false }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  
+
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id: task.id });
+    isDragging: isSortableDragging,
+  } = useSortable({ id: task._id || task.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    opacity: isDragging || isSortableDragging ? 0.5 : 1,
   };
 
   const handleMenuClick = (event) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDelete = (event) => {
+    event.stopPropagation();
+    onDelete(task._id || task.id);
+    handleMenuClose();
   };
 
   return (
@@ -177,59 +182,66 @@ const TaskCard = ({ task }) => {
       sx={{
         mb: 2,
         cursor: 'grab',
+        border: '1px solid hsl(214, 32%, 91%)',
+        background: 'linear-gradient(135deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 99%) 100%)',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-          boxShadow: 3,
+          borderColor: 'hsl(243, 82%, 67%)',
+          boxShadow: '0 8px 16px -4px hsla(220, 25%, 10%, 0.08), 0 6px 12px -2px hsla(220, 25%, 10%, 0.08)',
+          transform: 'translateY(-2px)',
         },
         '&:active': {
           cursor: 'grabbing',
         },
+        ...(isDragging && {
+          opacity: 0.7,
+          transform: 'rotate(3deg) scale(1.02)',
+          boxShadow: '0 20px 32px -4px hsla(220, 25%, 10%, 0.12), 0 12px 20px -4px hsla(220, 25%, 10%, 0.08)',
+        }),
       }}
     >
       <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+        <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={1}>
           <Chip
-            label={task.stage}
+            label={task.priority}
             size="small"
             sx={{
-              bgcolor: priorityColors[task.priority],
-              color: 'white',
+              bgcolor: getPriorityBgColor(task.priority),
+              color: getPriorityColor(task.priority),
+              border: `1px solid ${getPriorityColor(task.priority)}20`,
               fontSize: '0.7rem',
-              height: 20,
+              fontWeight: 600,
+              textTransform: 'capitalize',
+              '&:hover': {
+                bgcolor: getPriorityColor(task.priority),
+                color: 'white',
+              },
             }}
           />
-          <IconButton size="small" onClick={handleMenuClick}>
+          <IconButton
+            size="small"
+            onClick={handleMenuClick}
+            sx={{ mt: -0.5, mr: -0.5 }}
+          >
             <MoreVertIcon fontSize="small" />
           </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-          >
-            <MenuItem onClick={handleMenuClose}>Edit</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Duplicate</MenuItem>
-          </Menu>
         </Box>
 
-        <Typography variant="h6" sx={{ fontSize: '0.95rem', fontWeight: 600, mb: 1 }}>
+        <Typography variant="h6" component="h3" gutterBottom sx={{ fontSize: '0.9rem', fontWeight: 600 }}>
           {task.title}
         </Typography>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mb: 2, fontSize: '0.8rem', lineHeight: 1.3 }}
-        >
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, fontSize: '0.8rem' }}>
           {task.description}
         </Typography>
 
         {task.progress > 0 && (
           <Box sx={{ mb: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography variant="caption" color="text.secondary">
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={0.5}>
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                 Progress
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                 {task.progress}%
               </Typography>
             </Box>
@@ -241,57 +253,84 @@ const TaskCard = ({ task }) => {
                 borderRadius: 3,
                 bgcolor: 'grey.200',
                 '& .MuiLinearProgress-bar': {
-                  bgcolor: task.progress === 100 ? '#4CAF50' : '#2196F3',
+                  borderRadius: 3,
                 },
               }}
             />
           </Box>
         )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <AvatarGroup max={3} sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: '0.7rem' } }}>
-            {task.assignees.map((assignee) => (
+            {/* Handle both API data (assignedTo) and mock data (assignees) */}
+            {task.assignedTo ? (
+              <Avatar
+                sx={{ bgcolor: '#6366f1', width: 24, height: 24 }}
+              >
+                {task.assignedTo.name?.charAt(0).toUpperCase() || 'U'}
+              </Avatar>
+            ) : task.assignees?.map((assignee) => (
               <Avatar
                 key={assignee.id}
-                sx={{ bgcolor: assignee.color }}
-                title={assignee.name}
+                sx={{ bgcolor: assignee.color, width: 24, height: 24 }}
               >
                 {assignee.avatar}
               </Avatar>
             ))}
           </AvatarGroup>
 
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-            {task.comments > 0 && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+          <Box display="flex" alignItems="center" gap={1}>
+            {/* Handle comments - can be array or number */}
+            {((Array.isArray(task.comments) && task.comments.length > 0) || 
+              (typeof task.comments === 'number' && task.comments > 0)) && (
+              <Box display="flex" alignItems="center" gap={0.5}>
                 <CommentIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
                 <Typography variant="caption" color="text.secondary">
-                  {task.comments}
+                  {Array.isArray(task.comments) ? task.comments.length : task.comments}
                 </Typography>
               </Box>
             )}
-            {task.attachments > 0 && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+            {/* Handle attachments - can be array or number */}
+            {((Array.isArray(task.attachments) && task.attachments.length > 0) || 
+              (typeof task.attachments === 'number' && task.attachments > 0)) && (
+              <Box display="flex" alignItems="center" gap={0.5}>
                 <AttachmentIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
                 <Typography variant="caption" color="text.secondary">
-                  {task.attachments}
+                  {Array.isArray(task.attachments) ? task.attachments.length : task.attachments}
                 </Typography>
               </Box>
             )}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+            <Box display="flex" alignItems="center" gap={0.5}>
               <ScheduleIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
               <Typography variant="caption" color="text.secondary">
-                {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                {new Date(task.dueDate).toLocaleDateString()}
               </Typography>
             </Box>
           </Box>
         </Box>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <MenuItem onClick={handleMenuClose}>
+            <EditIcon sx={{ mr: 1, fontSize: 16 }} />
+            Edit
+          </MenuItem>
+          <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+            <DeleteIcon sx={{ mr: 1, fontSize: 16 }} />
+            Delete
+          </MenuItem>
+        </Menu>
       </CardContent>
     </Card>
   );
 };
 
-const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
+// Kanban Column Component
+const KanbanColumn = ({ columnId, title, tasks, color, bgColor, borderColor, onAddTask, onDeleteTask }) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const handleAddTask = (taskData) => {
@@ -300,42 +339,53 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
   };
 
   return (
-    <Box sx={{ flex: 1, minWidth: 280, mx: 1 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          mb: 2,
-          px: 1,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Box
+      sx={{
+        minWidth: 300,
+        maxWidth: 300,
+        bgcolor: 'background.paper',
+        borderRadius: 3,
+        border: `1px solid hsl(214, 32%, 91%)`,
+        p: 2,
+        height: 'fit-content',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        '&:hover': {
+          borderColor: borderColor,
+          boxShadow: '0 4px 6px -1px hsla(220, 25%, 10%, 0.08), 0 2px 4px -2px hsla(220, 25%, 10%, 0.08)',
+          transform: 'translateY(-1px)',
+        },
+      }}
+    >
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Box display="flex" alignItems="center" gap={1}>
           <Box
             sx={{
-              width: 8,
-              height: 8,
+              width: 12,
+              height: 12,
               borderRadius: '50%',
-              bgcolor: color,
+              background: `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`,
+              boxShadow: `0 2px 4px hsla(${color.match(/hsl\((\d+),/)?.[1] || '215'}, 20%, 30%, 0.3)`,
             }}
           />
-          <Typography variant="subtitle2" fontWeight={600}>
+          <Typography variant="h6" component="h2" sx={{ fontWeight: 600, fontSize: '0.9rem' }}>
             {title}
           </Typography>
           <Chip
-            label={count}
+            label={tasks.length}
             size="small"
             sx={{
-              bgcolor: 'grey.100',
-              color: 'text.secondary',
+              bgcolor: bgColor,
+              color: color,
+              border: `1px solid ${borderColor}`,
               height: 20,
               fontSize: '0.7rem',
+              fontWeight: 600,
+              '&:hover': {
+                bgcolor: borderColor,
+              },
             }}
           />
         </Box>
-        <IconButton size="small">
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
       </Box>
 
       <Button
@@ -357,10 +407,20 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
         Add New Task
       </Button>
 
-      <SortableContext items={tasks.map(task => task.id)} strategy={verticalListSortingStrategy}>
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+      <SortableContext items={tasks.map(task => task._id || task.id)} strategy={verticalListSortingStrategy}>
+        <Box
+          id={`column-${columnId}`}
+          sx={{
+            minHeight: 100,
+            '&.droppable': {
+              bgcolor: 'primary.50',
+            },
+          }}
+        >
+          {tasks.map((task) => (
+            <TaskCard key={task._id || task.id} task={task} onDelete={onDeleteTask} />
+          ))}
+        </Box>
       </SortableContext>
 
       <CreateTaskModal
@@ -373,87 +433,369 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
   );
 };
 
-const KanbanBoard = () => {
+// Main Kanban Board Component
+const KanbanBoard = ({ projectId, boardId }) => {
   const [activeId, setActiveId] = useState(null);
-  const [tasks, setTasks] = useState(mockTasks);
-  const sensors = useSensors(useSensor(PointerSensor));
+  const [tasks, setTasks] = useState({ todo: [], 'in-progress': [], review: [], done: [] });
+  const [loading, setLoading] = useState(true);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+  // Fetch tasks when component mounts or projectId changes
+  useEffect(() => {
+    const fetchTasks = async () => {
+      if (!projectId) return;
+      
+      try {
+        setLoading(true);
+        const response = await tasksAPI.getByProject(projectId);
+        const tasksData = response.data;
+        
+        // Group tasks by status
+        const groupedTasks = {
+          todo: tasksData.filter(task => task.status === 'todo'),
+          'in-progress': tasksData.filter(task => task.status === 'in-progress'),
+          review: tasksData.filter(task => task.status === 'review'),
+          done: tasksData.filter(task => task.status === 'completed'),
+        };
+        
+        setTasks(groupedTasks);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+        setSnackbar({
+          open: true,
+          message: 'Failed to load tasks',
+          severity: 'error',
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, [projectId]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
 
   const columns = [
-    { id: 'todo', title: 'To Do', tasks: tasks.todo, color: '#FF6B6B' },
-    { id: 'in-progress', title: 'In Progress', tasks: tasks['in-progress'], color: '#4ECDC4' },
-    { id: 'review', title: 'Need Review', tasks: tasks.review, color: '#FFE66D' },
-    { id: 'done', title: 'Done', tasks: tasks.done, color: '#95E1D3' },
+    { 
+      id: 'todo', 
+      title: 'To Do', 
+      tasks: tasks.todo || [], 
+      color: 'hsl(215, 20%, 65%)',
+      bgColor: 'hsl(215, 20%, 95%)',
+      borderColor: 'hsl(215, 20%, 85%)'
+    },
+    { 
+      id: 'in-progress', 
+      title: 'In Progress', 
+      tasks: tasks['in-progress'] || [], 
+      color: 'hsl(217, 91%, 60%)',
+      bgColor: 'hsl(217, 91%, 95%)',
+      borderColor: 'hsl(217, 91%, 85%)'
+    },
+    { 
+      id: 'review', 
+      title: 'Need Review', 
+      tasks: tasks.review || [], 
+      color: 'hsl(38, 92%, 50%)',
+      bgColor: 'hsl(38, 92%, 95%)',
+      borderColor: 'hsl(38, 92%, 85%)'
+    },
+    { 
+      id: 'done', 
+      title: 'Done', 
+      tasks: tasks.done || [], 
+      color: 'hsl(158, 76%, 39%)',
+      bgColor: 'hsl(158, 76%, 95%)',
+      borderColor: 'hsl(158, 76%, 85%)'
+    },
   ];
+
+  const findContainer = (id) => {
+    if (tasks.todo?.find(task => task._id === id || task.id === id)) return 'todo';
+    if (tasks['in-progress']?.find(task => task._id === id || task.id === id)) return 'in-progress';
+    if (tasks.review?.find(task => task._id === id || task.id === id)) return 'review';
+    if (tasks.done?.find(task => task._id === id || task.id === id)) return 'done';
+    return null;
+  };
 
   const handleDragStart = (event) => {
     setActiveId(event.active.id);
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = async (event) => {
     setActiveId(null);
-    // Handle task movement logic here
     const { active, over } = event;
     
     if (!over) return;
+
+    const sourceContainer = findContainer(active.id);
+    let destinationContainer = over.id;
     
-    // Task movement between columns would be implemented here
-    console.log('Moving task', active.id, 'to', over.id);
+    // If dropped on a column container
+    if (over.id.startsWith('column-')) {
+      destinationContainer = over.id.replace('column-', '');
+    }
+    // If dropped on a task, get the container of that task
+    else if (!columns.find(col => col.id === over.id)) {
+      destinationContainer = findContainer(over.id);
+    }
+    
+    if (!sourceContainer || !destinationContainer || sourceContainer === destinationContainer) return;
+
+    const taskIndex = tasks[sourceContainer]?.findIndex(task => task.id === active.id);
+    if (taskIndex === -1) return;
+
+    const task = tasks[sourceContainer][taskIndex];
+    
+    // Update UI optimistically
+    setTasks(prevTasks => {
+      const sourceItems = [...(prevTasks[sourceContainer] || [])];
+      const destItems = [...(prevTasks[destinationContainer] || [])];
+      
+      // Remove from source
+      sourceItems.splice(taskIndex, 1);
+      
+      // Map status to API format
+      const statusMap = {
+        'todo': 'todo',
+        'in-progress': 'in-progress',
+        'review': 'review',
+        'done': 'completed'
+      };
+      
+      // Add to destination
+      const updatedTask = { ...task, status: statusMap[destinationContainer] || destinationContainer };
+      destItems.push(updatedTask);
+
+      return {
+        ...prevTasks,
+        [sourceContainer]: sourceItems,
+        [destinationContainer]: destItems,
+      };
+    });
+
+    try {
+      // Update task status via API
+      const statusMap = {
+        'todo': 'todo',
+        'in-progress': 'in-progress',
+        'review': 'review',
+        'done': 'completed'
+      };
+      
+      await tasksAPI.updateStatus(active.id, statusMap[destinationContainer]);
+      
+      setSnackbar({
+        open: true,
+        message: `Task moved to ${columns.find(col => col.id === destinationContainer)?.title}`,
+        severity: 'success',
+      });
+    } catch (error) {
+      console.error('Error updating task status:', error);
+      // Revert the optimistic update
+      setTasks(prevTasks => {
+        const sourceItems = [...(prevTasks[sourceContainer] || [])];
+        const destItems = [...(prevTasks[destinationContainer] || [])];
+        
+        // Remove from destination
+        const revertIndex = destItems.findIndex(t => t.id === active.id);
+        if (revertIndex !== -1) {
+          const taskToRevert = destItems[revertIndex];
+          destItems.splice(revertIndex, 1);
+          sourceItems.splice(taskIndex, 0, { ...taskToRevert, status: task.status });
+        }
+
+        return {
+          ...prevTasks,
+          [sourceContainer]: sourceItems,
+          [destinationContainer]: destItems,
+        };
+      });
+      
+      setSnackbar({
+        open: true,
+        message: 'Failed to move task',
+        severity: 'error',
+      });
+    }
   };
 
-  const handleAddTask = (columnId, taskData) => {
-    const newTask = {
-      ...taskData,
-      id: Date.now().toString(),
-    };
+  const handleAddTask = async (columnId, taskData) => {
+    try {
+      // Map column status to API format
+      const statusMap = {
+        'todo': 'todo',
+        'in-progress': 'in-progress',
+        'review': 'review',
+        'done': 'completed'
+      };
 
-    setTasks(prevTasks => ({
-      ...prevTasks,
-      [columnId]: [...prevTasks[columnId], newTask],
-    }));
+      const newTaskData = {
+        ...taskData,
+        project: projectId,
+        status: statusMap[columnId] || columnId,
+      };
+
+      const response = await tasksAPI.create(newTaskData);
+      const createdTask = response.data;
+
+      // Add to local state
+      setTasks(prevTasks => ({
+        ...prevTasks,
+        [columnId]: [...(prevTasks[columnId] || []), createdTask],
+      }));
+
+      setSnackbar({
+        open: true,
+        message: 'Task created successfully!',
+        severity: 'success',
+      });
+    } catch (error) {
+      console.error('Error creating task:', error);
+      setSnackbar({
+        open: true,
+        message: 'Failed to create task',
+        severity: 'error',
+      });
+    }
   };
+
+  const handleDeleteTask = (taskId) => {
+    setTaskToDelete(taskId);
+    setDeleteConfirmOpen(true);
+  };
+
+  const confirmDeleteTask = async () => {
+    try {
+      await tasksAPI.delete(taskToDelete);
+      
+      const container = findContainer(taskToDelete);
+      if (container) {
+        setTasks(prevTasks => ({
+          ...prevTasks,
+          [container]: prevTasks[container].filter(task => task._id !== taskToDelete && task.id !== taskToDelete),
+        }));
+
+        setSnackbar({
+          open: true,
+          message: 'Task deleted successfully!',
+          severity: 'success',
+        });
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      setSnackbar({
+        open: true,
+        message: 'Failed to delete task',
+        severity: 'error',
+      });
+    } finally {
+      setDeleteConfirmOpen(false);
+      setTaskToDelete(null);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 400 }}>
+        <Typography>Loading tasks...</Typography>
+      </Box>
+    );
+  }
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 2,
-          p: 3,
-          minHeight: 'calc(100vh - 64px)',
-          bgcolor: '#f8fafc',
-          overflowX: 'auto',
-        }}
+    <>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
       >
-        {columns.map((column) => (
-          <KanbanColumn
-            key={column.id}
-            columnId={column.id}
-            title={column.title}
-            tasks={column.tasks}
-            count={column.tasks.length}
-            color={column.color}
-            onAddTask={handleAddTask}
-          />
-        ))}
-      </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+            p: 3,
+            minHeight: 'calc(100vh - 64px)',
+            bgcolor: 'background.default',
+            overflowX: 'auto',
+          }}
+        >
+          {columns.map((column) => (
+            <KanbanColumn
+              key={column.id}
+              columnId={column.id}
+              title={column.title}
+              tasks={column.tasks}
+              color={column.color}
+              bgColor={column.bgColor}
+              borderColor={column.borderColor}
+              onAddTask={handleAddTask}
+              onDeleteTask={handleDeleteTask}
+            />
+          ))}
+        </Box>
 
-      <DragOverlay>
-        {activeId ? (
-          <TaskCard
-            task={
-              Object.values(tasks)
-                .flat()
-                .find((task) => task.id === activeId)
-            }
-          />
-        ) : null}
-      </DragOverlay>
-    </DndContext>
+        <DragOverlay>
+          {activeId ? (
+            <TaskCard
+              task={
+                Object.values(tasks)
+                  .flat()
+                  .find((task) => task.id === activeId)
+              }
+              isDragging
+            />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteConfirmOpen}
+        onClose={() => setDeleteConfirmOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Delete Task</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete this task? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteConfirmOpen(false)}>Cancel</Button>
+          <Button onClick={confirmDeleteTask} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Success/Error Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar(prev => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={() => setSnackbar(prev => ({ ...prev, open: false }))}
+          severity={snackbar.severity}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

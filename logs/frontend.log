@@ -1,0 +1,2620 @@
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:1423312) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:1423312) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.50.132:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/App.js
+  Line 40:6:   'ThemeProvider' is not defined  react/jsx-no-undef
+  Line 40:27:  'modernTheme' is not defined    no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/App.js
+  Line 5:10:  'CustomThemeProvider' is defined but never used  no-unused-vars
+
+ERROR in [eslint] 
+src/App.js
+  Line 40:6:   'ThemeProvider' is not defined  react/jsx-no-undef
+  Line 40:27:  'modernTheme' is not defined    no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used      no-unused-vars
+  Line 15:3:   'Dialog' is defined but never used         no-unused-vars
+  Line 16:3:   'DialogTitle' is defined but never used    no-unused-vars
+  Line 17:3:   'DialogContent' is defined but never used  no-unused-vars
+  Line 18:3:   'DialogActions' is defined but never used  no-unused-vars
+  Line 19:3:   'Snackbar' is defined but never used       no-unused-vars
+  Line 20:3:   'Alert' is defined but never used          no-unused-vars
+  Line 28:13:  'DeleteIcon' is defined but never used     no-unused-vars
+  Line 29:11:  'EditIcon' is defined but never used       no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used       no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used      no-unused-vars
+  Line 15:3:   'Dialog' is defined but never used         no-unused-vars
+  Line 16:3:   'DialogTitle' is defined but never used    no-unused-vars
+  Line 17:3:   'DialogContent' is defined but never used  no-unused-vars
+  Line 18:3:   'DialogActions' is defined but never used  no-unused-vars
+  Line 19:3:   'Snackbar' is defined but never used       no-unused-vars
+  Line 20:3:   'Alert' is defined but never used          no-unused-vars
+  Line 28:13:  'DeleteIcon' is defined but never used     no-unused-vars
+  Line 29:11:  'EditIcon' is defined but never used       no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used       no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/KanbanBoard.js
+Syntax error: Identifier 'handleDragEnd' has already been declared. (521:8) (521:8)
+ERROR in ./src/components/KanbanBoard.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/KanbanBoard.js: Identifier 'handleDragEnd' has already been declared. (521:8)
+
+  519 |   };
+  520 |
+> 521 |   const handleDragEnd = (event) => {
+      |         ^
+  522 |     setActiveId(null);
+  523 |     // Handle task movement logic here
+  524 |     const { active, over } = event;
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowScopeHandler.checkRedeclarationInScope (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:1647:19)
+    at FlowScopeHandler.declareName (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:1613:12)
+    at FlowScopeHandler.declareName (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:1714:11)
+    at FlowParserMixin.declareNameFromIdentifier (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:7594:16)
+    at FlowParserMixin.checkIdentifier (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:7590:12)
+    at FlowParserMixin.checkLVal (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:7529:12)
+    at FlowParserMixin.parseVarId (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13417:10)
+    at FlowParserMixin.parseVarId (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3507:11)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13388:12)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+
+ERROR in [eslint] 
+src/components/KanbanBoard.js
+  Line 521:8:  Parsing error: Identifier 'handleDragEnd' has already been declared. (521:8)
+
+webpack compiled with 2 errors
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used            no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used  no-unused-vars
+  Line 29:15:  'DarkModeIcon' is defined but never used      no-unused-vars
+  Line 30:16:  'LightModeIcon' is defined but never used     no-unused-vars
+  Line 31:13:  'LogoutIcon' is defined but never used        no-unused-vars
+  Line 33:10:  'useThemeMode' is defined but never used      no-unused-vars
+  Line 34:10:  'useAuth' is defined but never used           no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used            no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used  no-unused-vars
+  Line 29:15:  'DarkModeIcon' is defined but never used      no-unused-vars
+  Line 30:16:  'LightModeIcon' is defined but never used     no-unused-vars
+  Line 31:13:  'LogoutIcon' is defined but never used        no-unused-vars
+  Line 33:10:  'useThemeMode' is defined but never used      no-unused-vars
+  Line 34:10:  'useAuth' is defined but never used           no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used                           no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used                 no-unused-vars
+  Line 29:15:  'DarkModeIcon' is defined but never used                     no-unused-vars
+  Line 30:16:  'LightModeIcon' is defined but never used                    no-unused-vars
+  Line 31:13:  'LogoutIcon' is defined but never used                       no-unused-vars
+  Line 39:10:  'profileMenuAnchor' is assigned a value but never used       no-unused-vars
+  Line 42:11:  'darkMode' is assigned a value but never used                no-unused-vars
+  Line 42:21:  'toggleDarkMode' is assigned a value but never used          no-unused-vars
+  Line 43:11:  'user' is assigned a value but never used                    no-unused-vars
+  Line 57:9:   'handleProfileMenuClick' is assigned a value but never used  no-unused-vars
+  Line 65:9:   'handleLogout' is assigned a value but never used            no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used                           no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used                 no-unused-vars
+  Line 29:15:  'DarkModeIcon' is defined but never used                     no-unused-vars
+  Line 30:16:  'LightModeIcon' is defined but never used                    no-unused-vars
+  Line 31:13:  'LogoutIcon' is defined but never used                       no-unused-vars
+  Line 39:10:  'profileMenuAnchor' is assigned a value but never used       no-unused-vars
+  Line 42:11:  'darkMode' is assigned a value but never used                no-unused-vars
+  Line 42:21:  'toggleDarkMode' is assigned a value but never used          no-unused-vars
+  Line 43:11:  'user' is assigned a value but never used                    no-unused-vars
+  Line 57:9:   'handleProfileMenuClick' is assigned a value but never used  no-unused-vars
+  Line 65:9:   'handleLogout' is assigned a value but never used            no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectHeader.js
+  Line 259:16:  'isDarkMode' is not defined          no-undef
+  Line 270:25:  'profileAnchorEl' is not defined     no-undef
+  Line 271:29:  'profileAnchorEl' is not defined     no-undef
+  Line 272:30:  'setProfileAnchorEl' is not defined  no-undef
+  Line 284:16:  'Divider' is not defined             react/jsx-no-undef
+  Line 285:40:  'setProfileAnchorEl' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used                      no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used            no-unused-vars
+  Line 39:10:  'profileMenuAnchor' is assigned a value but never used  no-unused-vars
+  Line 42:11:  'darkMode' is assigned a value but never used           no-unused-vars
+
+ERROR in [eslint] 
+src/components/ProjectHeader.js
+  Line 259:16:  'isDarkMode' is not defined          no-undef
+  Line 270:25:  'profileAnchorEl' is not defined     no-undef
+  Line 271:29:  'profileAnchorEl' is not defined     no-undef
+  Line 272:30:  'setProfileAnchorEl' is not defined  no-undef
+  Line 284:16:  'Divider' is not defined             react/jsx-no-undef
+  Line 285:40:  'setProfileAnchorEl' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectHeader.js
+  Line 260:16:  'isDarkMode' is not defined          no-undef
+  Line 271:25:  'profileAnchorEl' is not defined     no-undef
+  Line 272:29:  'profileAnchorEl' is not defined     no-undef
+  Line 273:30:  'setProfileAnchorEl' is not defined  no-undef
+  Line 286:40:  'setProfileAnchorEl' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used                      no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used            no-unused-vars
+  Line 40:10:  'profileMenuAnchor' is assigned a value but never used  no-unused-vars
+  Line 43:11:  'darkMode' is assigned a value but never used           no-unused-vars
+
+ERROR in [eslint] 
+src/components/ProjectHeader.js
+  Line 260:16:  'isDarkMode' is not defined          no-undef
+  Line 271:25:  'profileAnchorEl' is not defined     no-undef
+  Line 272:29:  'profileAnchorEl' is not defined     no-undef
+  Line 273:30:  'setProfileAnchorEl' is not defined  no-undef
+  Line 286:40:  'setProfileAnchorEl' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 1:27:   'useEffect' is defined but never used  no-unused-vars
+  Line 35:10:  'tasksAPI' is defined but never used   no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used                                                                 no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used                                                                   no-unused-vars
+  Line 400:6:   React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used                                                                 no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used                                                                   no-unused-vars
+  Line 400:6:   React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/KanbanBoard.js
+Syntax error: Missing semicolon. (553:25) (553:25)
+WARNING in [eslint] 
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/KanbanBoard.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/KanbanBoard.js: Missing semicolon. (553:25)
+
+  551 |     }
+  552 |   };
+> 553 |         [sourceContainer]: sourceItems,
+      |                          ^
+  554 |         [destinationContainer]: destItems,
+  555 |       };
+  556 |     });
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.semicolon (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6926:10)
+    at FlowParserMixin.parseExpressionStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13290:10)
+    at FlowParserMixin.parseExpressionStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2971:18)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12904:19)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+
+ERROR in [eslint] 
+src/components/KanbanBoard.js
+  Line 553:25:  Parsing error: Missing semicolon. (553:25)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 390:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 397:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 397:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:    'mockTasks' is assigned a value but never used  no-unused-vars
+  Line 401:10:  'loading' is assigned a value but never used    no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:   'mockTasks' is assigned a value but never used           no-unused-vars
+  Line 132:7:  'getPriorityBgColor' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:   'mockTasks' is assigned a value but never used           no-unused-vars
+  Line 132:7:  'getPriorityBgColor' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/components/ProjectSidebar.js
+  Line 62:5:  Duplicate key 'color'  no-dupe-keys
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/components/ProjectSidebar.js
+  Line 62:5:  Duplicate key 'color'  no-dupe-keys
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 12:8:  'CalendarView' is defined but never used     no-unused-vars
+  Line 13:8:  'BoardManagement' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 12:8:  'CalendarView' is defined but never used     no-unused-vars
+  Line 13:8:  'BoardManagement' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 12:8:   'CalendarView' is defined but never used               no-unused-vars
+  Line 13:8:   'BoardManagement' is defined but never used            no-unused-vars
+  Line 20:10:  'selectedBoard' is assigned a value but never used     no-unused-vars
+  Line 20:25:  'setSelectedBoard' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 12:8:   'CalendarView' is defined but never used               no-unused-vars
+  Line 13:8:   'BoardManagement' is defined but never used            no-unused-vars
+  Line 20:10:  'selectedBoard' is assigned a value but never used     no-unused-vars
+  Line 20:25:  'setSelectedBoard' is assigned a value but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used            no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used  no-unused-vars
+  Line 27:20:  'CalendarIcon' is defined but never used      no-unused-vars
+  Line 28:16:  'DashboardIcon' is defined but never used     no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:   'Switch' is defined but never used            no-unused-vars
+  Line 18:3:   'FormControlLabel' is defined but never used  no-unused-vars
+  Line 27:20:  'CalendarIcon' is defined but never used      no-unused-vars
+  Line 28:16:  'DashboardIcon' is defined but never used     no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/CalendarView.js
+  Line 37:6:  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 17:3:  'CardActions' is defined but never used                                                                         no-unused-vars
+  Line 57:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/BoardManagement.js
+  Line 56:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/BoardManagement.js
+  Line 56:6:  React Hook useEffect has a missing dependency: 'fetchBoards'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (289:0) (289:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (289:0)
+
+  287 | };
+  288 |
+> 289 | export default ProjectSidebar;
+      | ^
+  290 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 289:  Parsing error: 'import' and 'export' may only appear at the top level. (289:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+
+src/pages/Dashboard.js
+  Line 32:32:  'api' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 15:10:  'projectsAPI' is defined but never used             no-unused-vars
+  Line 15:23:  'tasksAPI' is defined but never used                no-unused-vars
+  Line 24:10:  'boards' is assigned a value but never used         no-unused-vars
+  Line 24:18:  'setBoards' is assigned a value but never used      no-unused-vars
+  Line 25:10:  'taskCounts' is assigned a value but never used     no-unused-vars
+  Line 25:22:  'setTaskCounts' is assigned a value but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+src/pages/Dashboard.js
+  Line 32:32:  'api' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 24:10:  'boards' is assigned a value but never used      no-unused-vars
+  Line 24:18:  'setBoards' is assigned a value but never used   no-unused-vars
+  Line 25:10:  'taskCounts' is assigned a value but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/pages/Dashboard.js
+  Line 24:10:  'boards' is assigned a value but never used     no-unused-vars
+  Line 24:18:  'setBoards' is assigned a value but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (304:0) (304:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (304:0)
+
+  302 | };
+  303 |
+> 304 | export default ProjectSidebar;
+      | ^
+  305 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 304:  Parsing error: 'import' and 'export' may only appear at the top level. (304:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/ProjectSidebar.js
+Syntax error: 'import' and 'export' may only appear at the top level. (297:0) (297:undefined)
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/ProjectSidebar.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/gaurav/Projects/New_Projects/Task-Management/frontend/src/components/ProjectSidebar.js: 'import' and 'export' may only appear at the top level. (297:0)
+
+  295 | };
+  296 |
+> 297 | export default ProjectSidebar;
+      | ^
+  298 |
+    at constructor (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at FlowParserMixin.raise (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12876:18)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseStatementListItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12752:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:61)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseBlock (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13302:10)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12106:24)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:63
+    at FlowParserMixin.forwardNoArrowParamsConversionAt (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3099:16)
+    at FlowParserMixin.parseFunctionBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2923:12)
+    at FlowParserMixin.parseArrowExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12081:10)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11691:12)
+    at FlowParserMixin.parseParenAndDistinguishExpression (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3624:18)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11331:23)
+    at FlowParserMixin.parseExprAtom (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at FlowParserMixin.parseExprSubscripts (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11081:23)
+    at FlowParserMixin.parseUpdate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11066:21)
+    at FlowParserMixin.parseMaybeUnary (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:11046:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10899:61)
+    at FlowParserMixin.parseExprOps (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10904:23)
+    at FlowParserMixin.parseMaybeConditional (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10881:23)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10831:21)
+    at FlowParserMixin.parseMaybeAssign (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3582:18)
+    at /home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:39
+    at FlowParserMixin.allowInAnd (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12427:16)
+    at FlowParserMixin.parseMaybeAssignAllowIn (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:10800:17)
+    at FlowParserMixin.parseVar (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13389:91)
+    at FlowParserMixin.parseVarStatement (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13235:10)
+    at FlowParserMixin.parseStatementContent (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12856:23)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12772:17)
+    at FlowParserMixin.parseStatementLike (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:2949:24)
+    at FlowParserMixin.parseModuleItem (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12749:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13321:36)
+    at FlowParserMixin.parseBlockBody (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:13314:10)
+    at FlowParserMixin.parseProgram (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12630:10)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:12620:25)
+    at FlowParserMixin.parseTopLevel (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:3718:28)
+    at FlowParserMixin.parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14497:10)
+    at parse (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/parser/lib/index.js:14531:38)
+    at parser (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/gaurav/Projects/New_Projects/Task-Management/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+
+ERROR in [eslint] 
+src/components/ProjectSidebar.js
+  Line 297:  Parsing error: 'import' and 'export' may only appear at the top level. (297:0)
+
+webpack compiled with 2 errors and 1 warning
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/components/ProjectSidebar.js
+  Line 56:9:  'handleProjectSelect' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/KanbanBoard.js
+  Line 38:7:  'mockTasks' is assigned a value but never used  no-unused-vars
+
+src/components/ProjectHeader.js
+  Line 17:3:  'Switch' is defined but never used            no-unused-vars
+  Line 18:3:  'FormControlLabel' is defined but never used  no-unused-vars
+
+src/components/ProjectSidebar.js
+  Line 56:9:  'handleProjectSelect' is assigned a value but never used  no-unused-vars
+
+webpack compiled with 1 warning
