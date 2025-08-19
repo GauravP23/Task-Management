@@ -23,6 +23,7 @@ import {
 import { DndContext, closestCenter, DragOverlay, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import CreateTaskModal from './CreateTaskModal';
 
 // Mock data for demonstration
 const mockTasks = {
@@ -290,7 +291,14 @@ const TaskCard = ({ task }) => {
   );
 };
 
-const KanbanColumn = ({ title, tasks, count, color }) => {
+const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const handleAddTask = (taskData) => {
+    onAddTask(columnId, taskData);
+    setShowCreateModal(false);
+  };
+
   return (
     <Box sx={{ flex: 1, minWidth: 280, mx: 1 }}>
       <Box
@@ -334,6 +342,7 @@ const KanbanColumn = ({ title, tasks, count, color }) => {
         variant="outlined"
         startIcon={<AddIcon />}
         fullWidth
+        onClick={() => setShowCreateModal(true)}
         sx={{
           mb: 2,
           borderStyle: 'dashed',
@@ -353,19 +362,27 @@ const KanbanColumn = ({ title, tasks, count, color }) => {
           <TaskCard key={task.id} task={task} />
         ))}
       </SortableContext>
+
+      <CreateTaskModal
+        open={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onSubmit={handleAddTask}
+        columnId={columnId}
+      />
     </Box>
   );
 };
 
 const KanbanBoard = () => {
   const [activeId, setActiveId] = useState(null);
+  const [tasks, setTasks] = useState(mockTasks);
   const sensors = useSensors(useSensor(PointerSensor));
 
   const columns = [
-    { id: 'todo', title: 'To Do', tasks: mockTasks.todo, color: '#FF6B6B' },
-    { id: 'in-progress', title: 'In Progress', tasks: mockTasks['in-progress'], color: '#4ECDC4' },
-    { id: 'review', title: 'Need Review', tasks: mockTasks.review, color: '#FFE66D' },
-    { id: 'done', title: 'Done', tasks: mockTasks.done, color: '#95E1D3' },
+    { id: 'todo', title: 'To Do', tasks: tasks.todo, color: '#FF6B6B' },
+    { id: 'in-progress', title: 'In Progress', tasks: tasks['in-progress'], color: '#4ECDC4' },
+    { id: 'review', title: 'Need Review', tasks: tasks.review, color: '#FFE66D' },
+    { id: 'done', title: 'Done', tasks: tasks.done, color: '#95E1D3' },
   ];
 
   const handleDragStart = (event) => {
@@ -375,6 +392,24 @@ const KanbanBoard = () => {
   const handleDragEnd = (event) => {
     setActiveId(null);
     // Handle task movement logic here
+    const { active, over } = event;
+    
+    if (!over) return;
+    
+    // Task movement between columns would be implemented here
+    console.log('Moving task', active.id, 'to', over.id);
+  };
+
+  const handleAddTask = (columnId, taskData) => {
+    const newTask = {
+      ...taskData,
+      id: Date.now().toString(),
+    };
+
+    setTasks(prevTasks => ({
+      ...prevTasks,
+      [columnId]: [...prevTasks[columnId], newTask],
+    }));
   };
 
   return (
@@ -397,10 +432,12 @@ const KanbanBoard = () => {
         {columns.map((column) => (
           <KanbanColumn
             key={column.id}
+            columnId={column.id}
             title={column.title}
             tasks={column.tasks}
             count={column.tasks.length}
             color={column.color}
+            onAddTask={handleAddTask}
           />
         ))}
       </Box>
@@ -409,7 +446,7 @@ const KanbanBoard = () => {
         {activeId ? (
           <TaskCard
             task={
-              Object.values(mockTasks)
+              Object.values(tasks)
                 .flat()
                 .find((task) => task.id === activeId)
             }
