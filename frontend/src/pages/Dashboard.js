@@ -11,6 +11,9 @@ import ProjectHeader from '../components/ProjectHeader';
 import KanbanBoard from '../components/KanbanBoard';
 import CalendarView from '../components/CalendarView';
 import BoardManagement from '../components/BoardManagement';
+import Analytics from '../components/Analytics';
+import TaskManagement from '../components/TaskManagement';
+import CreateProjectDialog from '../components/CreateProjectDialog';
 import { useAuth } from '../context/AuthContext';
 import { projectsAPI, tasksAPI } from '../utils/api';
 
@@ -18,11 +21,13 @@ const Dashboard = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentView, setCurrentView] = useState('board');
   const [selectedBoard, setSelectedBoard] = useState(null);
+  const [sidebarView, setSidebarView] = useState('dashboard'); // New state for sidebar navigation
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [projects, setProjects] = useState([]);
   const [boards, setBoards] = useState([]);
   const [taskCounts, setTaskCounts] = useState({});
+  const [createProjectOpen, setCreateProjectOpen] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -88,6 +93,19 @@ const Dashboard = () => {
     setSelectedBoard(board);
   };
 
+  const handleCreateProject = () => {
+    setCreateProjectOpen(true);
+  };
+
+  const handleCloseCreateProject = () => {
+    setCreateProjectOpen(false);
+  };
+
+  const handleProjectCreated = (newProject) => {
+    setProjects(prev => [...prev, newProject]);
+    setSelectedProject(newProject);
+  };
+
   const renderMainContent = () => {
     if (!selectedProject) {
       return (
@@ -99,9 +117,23 @@ const Dashboard = () => {
       );
     }
 
+    // Handle sidebar navigation views
+    if (sidebarView === 'analytics') {
+      return <Analytics selectedProject={selectedProject} />;
+    }
+    
+    if (sidebarView === 'tasks') {
+      return <TaskManagement selectedProject={selectedProject} />;
+    }
+
+    if (sidebarView === 'calendar') {
+      return <CalendarView projectId={selectedProject._id || selectedProject.id} />;
+    }
+
+    // Handle header navigation views (board, table, list, etc.)
     switch (currentView) {
       case 'board':
-        return <KanbanBoard projectId={selectedProject._id || selectedProject.id} boardId={selectedBoard?._id || selectedBoard?.id} />;
+        return <KanbanBoard projectId={selectedProject._id || selectedProject.id} boardId={selectedBoard?.id} />;
       case 'calendar':
         return <CalendarView projectId={selectedProject._id || selectedProject.id} />;
       case 'boards':
@@ -110,8 +142,6 @@ const Dashboard = () => {
             projectId={selectedProject._id || selectedProject.id} 
             onBoardSelect={handleBoardSelect}
             selectedBoard={selectedBoard}
-            boards={boards}
-            setBoards={setBoards}
           />
         );
       case 'table':
@@ -131,7 +161,7 @@ const Dashboard = () => {
           </Box>
         );
       default:
-        return <KanbanBoard projectId={selectedProject.id} boardId={selectedBoard?.id} />;
+        return <KanbanBoard projectId={selectedProject._id || selectedProject.id} boardId={selectedBoard?.id} />;
     }
   };
 
@@ -186,8 +216,10 @@ const Dashboard = () => {
       <ProjectSidebar 
         selectedProject={selectedProject}
         onProjectSelect={handleProjectSelect}
+        onNavigationChange={setSidebarView}
         projects={projects}
         setProjects={setProjects}
+        onCreateProject={handleCreateProject}
       />
       
       {/* Main Content */}
@@ -206,6 +238,13 @@ const Dashboard = () => {
         />
         {renderMainContent()}
       </Box>
+      
+      {/* Create Project Dialog */}
+      <CreateProjectDialog
+        open={createProjectOpen}
+        onClose={handleCloseCreateProject}
+        onProjectCreated={handleProjectCreated}
+      />
     </Box>
   );
 };

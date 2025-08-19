@@ -24,6 +24,10 @@ import {
   Add as AddIcon,
   MoreVert as MoreVertIcon,
   Circle as CircleIcon,
+  CalendarToday as CalendarIcon,
+  ViewColumn as BoardIcon,
+  Assignment as TaskIcon,
+  Analytics as AnalyticsIcon,
 } from '@mui/icons-material';
 
 const DRAWER_WIDTH = 280;
@@ -43,18 +47,29 @@ const statusColors = {
   offline: 'hsl(0, 0%, 65%)',
 };
 
-const ProjectSidebar = ({ selectedProject, onProjectSelect, projects, setProjects }) => {
+const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, projects, setProjects, onCreateProject }) => {
   const [selectedItem, setSelectedItem] = useState('dashboard');
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
     { id: 'projects', label: 'Projects', icon: <ProjectIcon /> },
+    { id: 'boards', label: 'Boards', icon: <BoardIcon /> },
+    { id: 'tasks', label: 'My Tasks', icon: <TaskIcon /> },
+    { id: 'calendar', label: 'Calendar', icon: <CalendarIcon /> },
+    { id: 'analytics', label: 'Analytics', icon: <AnalyticsIcon /> },
     { id: 'team', label: 'Team', icon: <PeopleIcon /> },
-    { id: 'schedule', label: 'Schedule', icon: <TimeIcon /> },
   ];
 
   const handleProjectSelect = (project) => {
     onProjectSelect(project);
+  };
+
+  const handleMenuItemClick = (itemId) => {
+    setSelectedItem(itemId);
+    // Handle navigation based on menu item
+    if (onNavigationChange) {
+      onNavigationChange(itemId);
+    }
   };
 
   return (
@@ -93,7 +108,7 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, projects, setProject
             <ListItem key={item.id} disablePadding>
               <ListItemButton
                 selected={selectedItem === item.id}
-                onClick={() => setSelectedItem(item.id)}
+                onClick={() => handleMenuItemClick(item.id)}
                 sx={{
                   borderRadius: 1,
                   mb: 0.5,
@@ -130,7 +145,12 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, projects, setProject
             <Typography variant="subtitle2" fontWeight={600} sx={{ color: 'hsl(243, 82%, 55%)' }}>
               Projects
             </Typography>
-            <IconButton size="small" sx={{ color: 'hsl(243, 82%, 67%)' }}>
+            <IconButton 
+              size="small" 
+              sx={{ color: 'hsl(243, 82%, 67%)' }}
+              onClick={onCreateProject}
+              title="Create new project"
+            >
               <AddIcon fontSize="small" />
             </IconButton>
           </Box>
@@ -205,6 +225,74 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, projects, setProject
         </Box>
 
         <Divider sx={{ mb: 2 }} />
+
+        {/* Mini Calendar Widget */}
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="subtitle2" fontWeight={600} sx={{ color: 'hsl(243, 82%, 55%)', mb: 2 }}>
+            Calendar
+          </Typography>
+          <Card sx={{ 
+            bgcolor: 'hsl(240, 40%, 98%)', 
+            border: '1px solid hsl(243, 100%, 94%)',
+            boxShadow: '0 4px 16px hsla(243, 82%, 67%, 0.06)',
+          }}>
+            <CardContent sx={{ p: 2 }}>
+              <Box sx={{ textAlign: 'center', mb: 2 }}>
+                <Typography variant="body2" fontWeight={600} sx={{ color: 'hsl(243, 82%, 35%)' }}>
+                  {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                </Typography>
+              </Box>
+              <Box sx={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(7, 1fr)', 
+                gap: 0.5,
+                textAlign: 'center'
+              }}>
+                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+                  <Typography 
+                    key={index} 
+                    variant="caption" 
+                    sx={{ 
+                      color: 'hsl(243, 82%, 55%)', 
+                      fontWeight: 600,
+                      py: 0.5
+                    }}
+                  >
+                    {day}
+                  </Typography>
+                ))}
+                {Array.from({ length: 35 }, (_, index) => {
+                  const date = new Date();
+                  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                  const startDate = new Date(firstDay);
+                  startDate.setDate(startDate.getDate() - firstDay.getDay() + index);
+                  const isCurrentMonth = startDate.getMonth() === date.getMonth();
+                  const isToday = startDate.toDateString() === date.toDateString();
+                  
+                  return (
+                    <Box
+                      key={index}
+                      sx={{
+                        p: 0.5,
+                        cursor: 'pointer',
+                        borderRadius: 1,
+                        bgcolor: isToday ? 'hsl(243, 82%, 67%)' : 'transparent',
+                        color: isToday ? 'white' : isCurrentMonth ? 'hsl(243, 82%, 35%)' : 'hsl(243, 82%, 75%)',
+                        '&:hover': {
+                          bgcolor: isToday ? 'hsl(243, 82%, 57%)' : 'hsl(243, 100%, 97%)',
+                        },
+                      }}
+                    >
+                      <Typography variant="caption" fontWeight={isToday ? 600 : 400}>
+                        {startDate.getDate()}
+                      </Typography>
+                    </Box>
+                  );
+                })}
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
 
         {/* Team Members Section */}
         <Box sx={{ mb: 3 }}>
