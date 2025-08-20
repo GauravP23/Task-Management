@@ -37,7 +37,13 @@ const CalendarView = ({ projectId }) => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [createEventOpen, setCreateEventOpen] = useState(false);
-  const [selectedDateForEvent, setSelectedDateForEvent] = useState(null);
+  const [eventForm, setEventForm] = useState({
+    title: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+    category: 'tasks'
+  });
 
   // Calendar categories (like Google Calendar's "My calendars")
   const [calendars, setCalendars] = useState([
@@ -51,12 +57,14 @@ const CalendarView = ({ projectId }) => {
     const fetchTasksData = async () => {
       try {
         setLoading(true);
+        let tasksData = [];
+        
         if (projectId && projectId !== 'default') {
           const response = await tasksAPI.getByProject(projectId);
-          setTasks(response.data || []);
+          tasksData = response.data || [];
         } else {
           // Enhanced mock data with calendar categories
-          setTasks([
+          tasksData = [
             {
               id: 1,
               title: 'Team Standup',
@@ -111,8 +119,14 @@ const CalendarView = ({ projectId }) => {
               category: 'meetings',
               type: 'meeting'
             }
-          ]);
+          ];
         }
+
+        // Load saved events from localStorage
+        const savedEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+        const allTasks = [...tasksData, ...savedEvents];
+        
+        setTasks(allTasks);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
         setTasks([]);
@@ -156,8 +170,78 @@ const CalendarView = ({ projectId }) => {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const handleDateClick = (date) => {
-    setSelectedDateForEvent(date);
     setCreateEventOpen(true);
+    // Set default start time to the selected date
+    const defaultStart = new Date(date);
+    defaultStart.setHours(9, 0); // 9:00 AM
+    const defaultEnd = new Date(date);
+    defaultEnd.setHours(10, 0); // 10:00 AM
+    
+    setEventForm({
+      title: '',
+      description: '',
+      startDate: defaultStart.toISOString().slice(0, 16),
+      endDate: defaultEnd.toISOString().slice(0, 16),
+      category: 'tasks'
+    });
+  };
+
+  // Handle form input changes
+  const handleEventFormChange = (field, value) => {
+    setEventForm(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  // Handle saving new event
+  const handleSaveEvent = () => {
+    if (!eventForm.title.trim()) {
+      alert('Please enter an event title');
+      return;
+    }
+
+    if (eventForm.startDate > eventForm.endDate) {
+      alert('End date must be after start date');
+      return;
+    }
+
+    // Create new task/event object
+    const newEvent = {
+      id: Date.now().toString(),
+      _id: Date.now().toString(),
+      title: eventForm.title.trim(),
+      description: eventForm.description.trim(),
+      dueDate: new Date(eventForm.startDate), // Store as Date object for compatibility
+      startDate: eventForm.startDate,
+      endDate: eventForm.endDate,
+      status: 'pending',
+      priority: 'medium',
+      category: eventForm.category,
+      type: 'event',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    // Add to tasks state
+    setTasks(prevTasks => [...prevTasks, newEvent]);
+
+    // Save to localStorage for persistence in mock mode
+    const existingEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+    localStorage.setItem('calendarEvents', JSON.stringify([...existingEvents, newEvent]));
+
+    // Close dialog and reset form
+    setCreateEventOpen(false);
+    setEventForm({
+      title: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+      category: 'tasks'
+    });
+
+    // Show success feedback
+    console.log('Event created successfully:', newEvent.title);
   };
 
   const handleCalendarToggle = (calendarId) => {
@@ -550,6 +634,8 @@ const CalendarView = ({ projectId }) => {
               fullWidth
               label="Event Title"
               placeholder="Add title"
+              value={eventForm.title}
+              onChange={(e) => handleEventFormChange('title', e.target.value)}
               sx={{ mb: 2 }}
             />
             <TextField
@@ -557,28 +643,46 @@ const CalendarView = ({ projectId }) => {
               label="Description"
               multiline
               rows={3}
+              value={eventForm.description}
+              onChange={(e) => handleEventFormChange('description', e.target.value)}
               sx={{ mb: 2 }}
             />
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
               <TextField
                 label="Start Date"
                 type="datetime-local"
                 InputLabelProps={{ shrink: true }}
-                defaultValue={selectedDateForEvent?.toISOString().slice(0, 16)}
+                value={eventForm.startDate}
+                onChange={(e) => handleEventFormChange('startDate', e.target.value)}
                 sx={{ flex: 1 }}
               />
               <TextField
                 label="End Date"
                 type="datetime-local"
                 InputLabelProps={{ shrink: true }}
+                value={eventForm.endDate}
+                onChange={(e) => handleEventFormChange('endDate', e.target.value)}
                 sx={{ flex: 1 }}
               />
             </Box>
+            <TextField
+              select
+              fullWidth
+              label="Category"
+              value={eventForm.category}
+              onChange={(e) => handleEventFormChange('category', e.target.value)}
+              SelectProps={{ native: true }}
+            >
+              <option value="tasks">Tasks</option>
+              <option value="meetings">Meetings</option>
+              <option value="deadlines">Deadlines</option>
+              <option value="personal">Personal</option>
+            </TextField>
           </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setCreateEventOpen(false)}>Cancel</Button>
-          <Button variant="contained" sx={{ bgcolor: 'hsl(243, 82%, 67%)' }}>
+          <Button variant="contained" onClick={handleSaveEvent} sx={{ bgcolor: 'hsl(243, 82%, 67%)' }}>
             Save
           </Button>
         </DialogActions>

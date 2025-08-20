@@ -60,121 +60,106 @@ const mockTasks = {
       stage: 'Design',
       progress: 0,
       assignees: [
-        { id: 3, name: 'Sarah Green', avatar: 'SG', color: '#45B7D1' },
+        { id: 3, name: 'John Doe', avatar: 'JD', color: '#95E1D3' },
       ],
       comments: 1,
-      attachments: 3,
-      dueDate: '2025-08-22',
+      attachments: 2,
+      dueDate: '2025-08-28',
     },
   ],
   'in-progress': [
     {
       id: '3',
-      title: 'Customer Journey Mapping',
-      description: 'Map the customer journey and develop strategies to improve the overall customer experience',
+      title: 'User research',
+      description: 'Conduct user interviews and analyze feedback',
       priority: 'high',
-      stage: 'UX design',
-      progress: 45,
+      stage: 'Research',
+      progress: 65,
       assignees: [
-        { id: 4, name: 'Brad Smith', avatar: 'BS', color: '#96CEB4' },
-        { id: 5, name: 'Alice Cornell', avatar: 'AC', color: '#FECA57' },
+        { id: 4, name: 'Alice Johnson', avatar: 'AJ', color: '#FFE66D' },
+        { id: 5, name: 'Bob Wilson', avatar: 'BW', color: '#FF8B94' },
       ],
-      comments: 4,
+      comments: 5,
       attachments: 1,
-      dueDate: '2025-08-20',
-    },
-    {
-      id: '4',
-      title: 'Persona development',
-      description: 'Create user personas based on research data',
-      priority: 'medium',
-      stage: 'UX design',
-      progress: 70,
-      assignees: [
-        { id: 6, name: 'Mike Johnson', avatar: 'MJ', color: '#FF9FF3' },
-      ],
-      comments: 2,
-      attachments: 2,
-      dueDate: '2025-08-23',
+      dueDate: '2025-08-30',
     },
   ],
   'review': [
     {
-      id: '5',
-      title: 'Competitor research',
-      description: 'Analyze competitors and their strategies',
-      priority: 'low',
-      stage: 'UX design',
+      id: '4',
+      title: 'Design system',
+      description: 'Create comprehensive design system documentation',
+      priority: 'medium',
+      stage: 'Design',
       progress: 90,
       assignees: [
-        { id: 7, name: 'Emma Wilson', avatar: 'EW', color: '#54A0FF' },
-        { id: 8, name: 'John Doe', avatar: 'JD', color: '#5F27CD' },
+        { id: 6, name: 'Emma Davis', avatar: 'ED', color: '#A8E6CF' },
       ],
-      comments: 0,
-      attachments: 1,
-      dueDate: '2025-08-19',
+      comments: 3,
+      attachments: 3,
+      dueDate: '2025-09-01',
     },
   ],
   'done': [
     {
-      id: '6',
-      title: 'Branding, visual identity',
-      description: 'Develop visual identity including logo, typography, color palettes',
+      id: '5',
+      title: 'Project kickoff',
+      description: 'Initial project meeting and requirements gathering',
       priority: 'high',
-      stage: 'Branding',
+      stage: 'Planning',
       progress: 100,
       assignees: [
-        { id: 9, name: 'Lisa Brown', avatar: 'LB', color: '#00D2D3' },
+        { id: 7, name: 'Mike Brown', avatar: 'MB', color: '#FFB3BA' },
       ],
-      comments: 3,
-      attachments: 0,
-      dueDate: '2025-08-18',
-    },
-    {
-      id: '7',
-      title: 'Marketing materials',
-      description: 'Create a template materials such as documents, presentations and social media graphics',
-      priority: 'medium',
-      stage: 'Branding',
-      progress: 100,
-      assignees: [
-        { id: 10, name: 'Tom Davis', avatar: 'TD', color: '#FF7675' },
-      ],
-      comments: 5,
-      attachments: 2,
-      dueDate: '2025-08-17',
+      comments: 8,
+      attachments: 5,
+      dueDate: '2025-08-20',
     },
   ],
 };
 
-const priorityColors = {
-  high: '#FF6B6B',
-  medium: '#FFE66D',
-  low: '#4ECDC4',
+// Priority colors
+const getPriorityColor = (priority) => {
+  switch (priority) {
+    case 'high': return '#ef4444';
+    case 'medium': return '#f59e0b';
+    case 'low': return '#10b981';
+    default: return '#6b7280';
+  }
 };
 
-const TaskCard = ({ task }) => {
+// Task Card Component
+const TaskCard = ({ task, onDelete, isDragging = false }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  
+
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
+    isDragging: isSortableDragging,
   } = useSortable({ id: task.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    opacity: isDragging || isSortableDragging ? 0.5 : 1,
   };
 
   const handleMenuClick = (event) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDelete = (event) => {
+    event.stopPropagation();
+    onDelete(task.id);
+    handleMenuClose();
   };
 
   return (
@@ -187,58 +172,50 @@ const TaskCard = ({ task }) => {
         mb: 2,
         cursor: 'grab',
         '&:hover': {
-          boxShadow: 3,
+          boxShadow: 4,
         },
-        '&:active': {
-          cursor: 'grabbing',
-        },
+        ...(isDragging && {
+          opacity: 0.5,
+          transform: 'rotate(5deg)',
+        }),
       }}
     >
       <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
+        <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={1}>
           <Chip
-            label={task.stage}
+            label={task.priority}
             size="small"
             sx={{
-              bgcolor: priorityColors[task.priority],
+              bgcolor: getPriorityColor(task.priority),
               color: 'white',
               fontSize: '0.7rem',
-              height: 20,
+              fontWeight: 600,
             }}
           />
-          <IconButton size="small" onClick={handleMenuClick}>
+          <IconButton
+            size="small"
+            onClick={handleMenuClick}
+            sx={{ mt: -0.5, mr: -0.5 }}
+          >
             <MoreVertIcon fontSize="small" />
           </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-          >
-            <MenuItem onClick={handleMenuClose}>Edit</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Duplicate</MenuItem>
-          </Menu>
         </Box>
 
-        <Typography variant="h6" sx={{ fontSize: '0.95rem', fontWeight: 600, mb: 1 }}>
+        <Typography variant="h6" component="h3" gutterBottom sx={{ fontSize: '0.9rem', fontWeight: 600 }}>
           {task.title}
         </Typography>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mb: 2, fontSize: '0.8rem', lineHeight: 1.3 }}
-        >
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, fontSize: '0.8rem' }}>
           {task.description}
         </Typography>
 
         {task.progress > 0 && (
           <Box sx={{ mb: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography variant="caption" color="text.secondary">
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={0.5}>
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                 Progress
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                 {task.progress}%
               </Typography>
             </Box>
@@ -250,29 +227,28 @@ const TaskCard = ({ task }) => {
                 borderRadius: 3,
                 bgcolor: 'grey.200',
                 '& .MuiLinearProgress-bar': {
-                  bgcolor: task.progress === 100 ? '#4CAF50' : '#2196F3',
+                  borderRadius: 3,
                 },
               }}
             />
           </Box>
         )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <AvatarGroup max={3} sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: '0.7rem' } }}>
             {task.assignees.map((assignee) => (
               <Avatar
                 key={assignee.id}
-                sx={{ bgcolor: assignee.color }}
-                title={assignee.name}
+                sx={{ bgcolor: assignee.color, width: 24, height: 24 }}
               >
                 {assignee.avatar}
               </Avatar>
             ))}
           </AvatarGroup>
 
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Box display="flex" alignItems="center" gap={1}>
             {task.comments > 0 && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+              <Box display="flex" alignItems="center" gap={0.5}>
                 <CommentIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
                 <Typography variant="caption" color="text.secondary">
                   {task.comments}
@@ -280,27 +256,44 @@ const TaskCard = ({ task }) => {
               </Box>
             )}
             {task.attachments > 0 && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+              <Box display="flex" alignItems="center" gap={0.5}>
                 <AttachmentIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
                 <Typography variant="caption" color="text.secondary">
                   {task.attachments}
                 </Typography>
               </Box>
             )}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
+            <Box display="flex" alignItems="center" gap={0.5}>
               <ScheduleIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
               <Typography variant="caption" color="text.secondary">
-                {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                {new Date(task.dueDate).toLocaleDateString()}
               </Typography>
             </Box>
           </Box>
         </Box>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <MenuItem onClick={handleMenuClose}>
+            <EditIcon sx={{ mr: 1, fontSize: 16 }} />
+            Edit
+          </MenuItem>
+          <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+            <DeleteIcon sx={{ mr: 1, fontSize: 16 }} />
+            Delete
+          </MenuItem>
+        </Menu>
       </CardContent>
     </Card>
   );
 };
 
-const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
+// Kanban Column Component
+const KanbanColumn = ({ columnId, title, tasks, color, onAddTask, onDeleteTask }) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const handleAddTask = (taskData) => {
@@ -309,30 +302,31 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
   };
 
   return (
-    <Box sx={{ flex: 1, minWidth: 280, mx: 1 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          mb: 2,
-          px: 1,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Box
+      sx={{
+        minWidth: 300,
+        maxWidth: 300,
+        bgcolor: 'background.paper',
+        borderRadius: 2,
+        p: 2,
+        height: 'fit-content',
+      }}
+    >
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Box display="flex" alignItems="center" gap={1}>
           <Box
             sx={{
-              width: 8,
-              height: 8,
+              width: 12,
+              height: 12,
               borderRadius: '50%',
               bgcolor: color,
             }}
           />
-          <Typography variant="subtitle2" fontWeight={600}>
+          <Typography variant="h6" component="h2" sx={{ fontWeight: 600, fontSize: '0.9rem' }}>
             {title}
           </Typography>
           <Chip
-            label={count}
+            label={tasks.length}
             size="small"
             sx={{
               bgcolor: 'grey.100',
@@ -342,9 +336,6 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
             }}
           />
         </Box>
-        <IconButton size="small">
-          <MoreVertIcon fontSize="small" />
-        </IconButton>
       </Box>
 
       <Button
@@ -367,9 +358,19 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
       </Button>
 
       <SortableContext items={tasks.map(task => task.id)} strategy={verticalListSortingStrategy}>
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        <Box
+          id={`column-${columnId}`}
+          sx={{
+            minHeight: 100,
+            '&.droppable': {
+              bgcolor: 'primary.50',
+            },
+          }}
+        >
+          {tasks.map((task) => (
+            <TaskCard key={task.id} task={task} onDelete={onDeleteTask} />
+          ))}
+        </Box>
       </SortableContext>
 
       <CreateTaskModal
@@ -382,11 +383,10 @@ const KanbanColumn = ({ title, tasks, count, color, onAddTask, columnId }) => {
   );
 };
 
+// Main Kanban Board Component
 const KanbanBoard = ({ projectId }) => {
   const [activeId, setActiveId] = useState(null);
   const [tasks, setTasks] = useState(mockTasks);
-  const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [selectedColumn, setSelectedColumn] = useState(null);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
@@ -406,16 +406,16 @@ const KanbanBoard = ({ projectId }) => {
     { id: 'done', title: 'Done', tasks: tasks.done || [], color: '#10b981' },
   ];
 
-  const handleDragStart = (event) => {
-    setActiveId(event.active.id);
-  };
-
   const findContainer = (id) => {
     if (tasks.todo?.find(task => task.id === id)) return 'todo';
     if (tasks['in-progress']?.find(task => task.id === id)) return 'in-progress';
     if (tasks.review?.find(task => task.id === id)) return 'review';
     if (tasks.done?.find(task => task.id === id)) return 'done';
     return null;
+  };
+
+  const handleDragStart = (event) => {
+    setActiveId(event.active.id);
   };
 
   const handleDragEnd = (event) => {
@@ -427,8 +427,12 @@ const KanbanBoard = ({ projectId }) => {
     const sourceContainer = findContainer(active.id);
     let destinationContainer = over.id;
     
+    // If dropped on a column container
+    if (over.id.startsWith('column-')) {
+      destinationContainer = over.id.replace('column-', '');
+    }
     // If dropped on a task, get the container of that task
-    if (!columns.find(col => col.id === over.id)) {
+    else if (!columns.find(col => col.id === over.id)) {
       destinationContainer = findContainer(over.id);
     }
     
@@ -513,76 +517,88 @@ const KanbanBoard = ({ projectId }) => {
     setTaskToDelete(null);
   };
 
-  const openCreateTaskModal = (columnId) => {
-    setSelectedColumn(columnId);
-    setOpenCreateModal(true);
-  };
-
-  const handleDragEnd = (event) => {
-    setActiveId(null);
-    // Handle task movement logic here
-    const { active, over } = event;
-    
-    if (!over) return;
-    
-    // Task movement between columns would be implemented here
-    console.log('Moving task', active.id, 'to', over.id);
-  };
-
-  const handleAddTask = (columnId, taskData) => {
-    const newTask = {
-      ...taskData,
-      id: Date.now().toString(),
-    };
-
-    setTasks(prevTasks => ({
-      ...prevTasks,
-      [columnId]: [...prevTasks[columnId], newTask],
-    }));
-  };
-
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 2,
-          p: 3,
-          minHeight: 'calc(100vh - 64px)',
-          bgcolor: '#f8fafc',
-          overflowX: 'auto',
-        }}
+    <>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
       >
-        {columns.map((column) => (
-          <KanbanColumn
-            key={column.id}
-            columnId={column.id}
-            title={column.title}
-            tasks={column.tasks}
-            count={column.tasks.length}
-            color={column.color}
-            onAddTask={handleAddTask}
-          />
-        ))}
-      </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+            p: 3,
+            minHeight: 'calc(100vh - 64px)',
+            bgcolor: 'background.default',
+            overflowX: 'auto',
+          }}
+        >
+          {columns.map((column) => (
+            <KanbanColumn
+              key={column.id}
+              columnId={column.id}
+              title={column.title}
+              tasks={column.tasks}
+              color={column.color}
+              onAddTask={handleAddTask}
+              onDeleteTask={handleDeleteTask}
+            />
+          ))}
+        </Box>
 
-      <DragOverlay>
-        {activeId ? (
-          <TaskCard
-            task={
-              Object.values(tasks)
-                .flat()
-                .find((task) => task.id === activeId)
-            }
-          />
-        ) : null}
-      </DragOverlay>
-    </DndContext>
+        <DragOverlay>
+          {activeId ? (
+            <TaskCard
+              task={
+                Object.values(tasks)
+                  .flat()
+                  .find((task) => task.id === activeId)
+              }
+              isDragging
+            />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteConfirmOpen}
+        onClose={() => setDeleteConfirmOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Delete Task</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete this task? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteConfirmOpen(false)}>Cancel</Button>
+          <Button onClick={confirmDeleteTask} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Success/Error Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar(prev => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={() => setSnackbar(prev => ({ ...prev, open: false }))}
+          severity={snackbar.severity}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

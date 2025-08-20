@@ -14,6 +14,7 @@ import {
   MenuItem,
   Dialog,
   DialogTitle,
+  useTheme,
   DialogContent,
   DialogActions,
   Snackbar,
@@ -28,120 +29,39 @@ import {
   Delete as DeleteIcon,
   Edit as EditIcon,
 } from '@mui/icons-material';
-import { DndContext, closestCenter, DragOverlay, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
+import { DndContext, closestCenter, DragOverlay, useSensor, useSensors, PointerSensor, useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import CreateTaskModal from './CreateTaskModal';
 import { tasksAPI } from '../utils/api';
 
-// Mock data for demonstration
-const mockTasks = {
-  'todo': [
-    {
-      id: '1',
-      title: 'Wireframing',
-      description: 'Create wireframes for the new product feature',
-      priority: 'high',
-      stage: 'UX design',
-      progress: 0,
-      assignees: [
-        { id: 1, name: 'Karen Smith', avatar: 'KS', color: '#FF6B6B' },
-        { id: 2, name: 'Steve McConnell', avatar: 'SM', color: '#4ECDC4' },
-      ],
-      comments: 2,
-      attachments: 0,
-      dueDate: '2025-08-25',
-    },
-    {
-      id: '2',
-      title: 'First design concept',
-      description: 'Create a concept based on requirements and stakeholder discovery phase',
-      priority: 'medium',
-      stage: 'Design',
-      progress: 0,
-      assignees: [
-        { id: 3, name: 'John Doe', avatar: 'JD', color: '#95E1D3' },
-      ],
-      comments: 1,
-      attachments: 2,
-      dueDate: '2025-08-28',
-    },
-  ],
-  'in-progress': [
-    {
-      id: '3',
-      title: 'User research',
-      description: 'Conduct user interviews and analyze feedback',
-      priority: 'high',
-      stage: 'Research',
-      progress: 65,
-      assignees: [
-        { id: 4, name: 'Alice Johnson', avatar: 'AJ', color: '#FFE66D' },
-        { id: 5, name: 'Bob Wilson', avatar: 'BW', color: '#FF8B94' },
-      ],
-      comments: 5,
-      attachments: 1,
-      dueDate: '2025-08-30',
-    },
-  ],
-  'review': [
-    {
-      id: '4',
-      title: 'Design system',
-      description: 'Create comprehensive design system documentation',
-      priority: 'medium',
-      stage: 'Design',
-      progress: 90,
-      assignees: [
-        { id: 6, name: 'Emma Davis', avatar: 'ED', color: '#A8E6CF' },
-      ],
-      comments: 3,
-      attachments: 3,
-      dueDate: '2025-09-01',
-    },
-  ],
-  'done': [
-    {
-      id: '5',
-      title: 'Project kickoff',
-      description: 'Initial project meeting and requirements gathering',
-      priority: 'high',
-      stage: 'Planning',
-      progress: 100,
-      assignees: [
-        { id: 7, name: 'Mike Brown', avatar: 'MB', color: '#FFB3BA' },
-      ],
-      comments: 8,
-      attachments: 5,
-      dueDate: '2025-08-20',
-    },
-  ],
+// Priority colors - theme-aware
+const getPriorityColor = (priority, theme) => {
+  const colors = {
+    urgent: theme.palette.error.main,
+    high: '#ff7043', // Orange
+    medium: '#ffa726', // Amber
+    low: theme.palette.text.disabled,
+    default: theme.palette.text.disabled
+  };
+  return colors[priority] || colors.default;
 };
 
-// Priority colors
-const getPriorityColor = (priority) => {
-  switch (priority) {
-    case 'urgent': return 'hsl(0, 84%, 60%)'; // Clean red for urgent
-    case 'high': return 'hsl(25, 95%, 53%)'; // Orange for high priority
-    case 'medium': return 'hsl(38, 92%, 50%)'; // Warm amber for medium
-    case 'low': return 'hsl(215, 20%, 65%)'; // Muted gray for low
-    default: return 'hsl(215, 20%, 65%)'; // Default to low priority color
-  }
-};
-
-const getPriorityBgColor = (priority) => {
-  switch (priority) {
-    case 'urgent': return 'hsl(0, 84%, 95%)';
-    case 'high': return 'hsl(25, 95%, 95%)';
-    case 'medium': return 'hsl(38, 92%, 95%)';
-    case 'low': return 'hsl(215, 20%, 95%)';
-    default: return 'hsl(215, 20%, 95%)';
-  }
+const getPriorityBgColor = (priority, theme) => {
+  const colors = {
+    urgent: theme.palette.mode === 'light' ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.2)',
+    high: theme.palette.mode === 'light' ? 'rgba(255, 112, 67, 0.1)' : 'rgba(255, 112, 67, 0.2)',
+    medium: theme.palette.mode === 'light' ? 'rgba(255, 167, 38, 0.1)' : 'rgba(255, 167, 38, 0.2)',
+    low: theme.palette.mode === 'light' ? 'rgba(158, 158, 158, 0.1)' : 'rgba(158, 158, 158, 0.2)',
+    default: theme.palette.mode === 'light' ? 'rgba(158, 158, 158, 0.1)' : 'rgba(158, 158, 158, 0.2)'
+  };
+  return colors[priority] || colors.default;
 };
 
 // Task Card Component
 const TaskCard = ({ task, onDelete, isDragging = false }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const theme = useTheme();
 
   const {
     attributes,
@@ -150,7 +70,12 @@ const TaskCard = ({ task, onDelete, isDragging = false }) => {
     transform,
     transition,
     isDragging: isSortableDragging,
-  } = useSortable({ id: task._id || task.id });
+  } = useSortable({ id: task?._id || task?.id || 'unknown' });
+
+  // Safety check for undefined task
+  if (!task) {
+    return null;
+  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -182,12 +107,13 @@ const TaskCard = ({ task, onDelete, isDragging = false }) => {
       sx={{
         mb: 2,
         cursor: 'grab',
-        border: '1px solid hsl(214, 32%, 91%)',
-        background: 'linear-gradient(135deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 99%) 100%)',
+        border: 1,
+        borderColor: 'divider',
+        bgcolor: 'background.paper',
         transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-          borderColor: 'hsl(243, 82%, 67%)',
-          boxShadow: '0 8px 16px -4px hsla(220, 25%, 10%, 0.08), 0 6px 12px -2px hsla(220, 25%, 10%, 0.08)',
+          borderColor: 'primary.main',
+          boxShadow: 2,
           transform: 'translateY(-2px)',
         },
         '&:active': {
@@ -206,14 +132,14 @@ const TaskCard = ({ task, onDelete, isDragging = false }) => {
             label={task.priority}
             size="small"
             sx={{
-              bgcolor: getPriorityBgColor(task.priority),
-              color: getPriorityColor(task.priority),
-              border: `1px solid ${getPriorityColor(task.priority)}20`,
+              bgcolor: getPriorityBgColor(task.priority, theme),
+              color: getPriorityColor(task.priority, theme),
+              border: `1px solid ${getPriorityColor(task.priority, theme)}20`,
               fontSize: '0.7rem',
               fontWeight: 600,
               textTransform: 'capitalize',
               '&:hover': {
-                bgcolor: getPriorityColor(task.priority),
+                bgcolor: getPriorityColor(task.priority, theme),
                 color: 'white',
               },
             }}
@@ -333,6 +259,10 @@ const TaskCard = ({ task, onDelete, isDragging = false }) => {
 const KanbanColumn = ({ columnId, title, tasks, color, bgColor, borderColor, onAddTask, onDeleteTask }) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
+  const { setNodeRef, isOver } = useDroppable({
+    id: `column-${columnId}`,
+  });
+
   const handleAddTask = (taskData) => {
     onAddTask(columnId, taskData);
     setShowCreateModal(false);
@@ -345,13 +275,14 @@ const KanbanColumn = ({ columnId, title, tasks, color, bgColor, borderColor, onA
         maxWidth: 300,
         bgcolor: 'background.paper',
         borderRadius: 3,
-        border: `1px solid hsl(214, 32%, 91%)`,
+        border: 1,
+        borderColor: 'divider',
         p: 2,
         height: 'fit-content',
         transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
           borderColor: borderColor,
-          boxShadow: '0 4px 6px -1px hsla(220, 25%, 10%, 0.08), 0 2px 4px -2px hsla(220, 25%, 10%, 0.08)',
+          boxShadow: 1,
           transform: 'translateY(-1px)',
         },
       }}
@@ -407,19 +338,38 @@ const KanbanColumn = ({ columnId, title, tasks, color, bgColor, borderColor, onA
         Add New Task
       </Button>
 
-      <SortableContext items={tasks.map(task => task._id || task.id)} strategy={verticalListSortingStrategy}>
+      <SortableContext items={tasks.filter(task => task != null).map(task => task._id || task.id)} strategy={verticalListSortingStrategy}>
         <Box
+          ref={setNodeRef}
           id={`column-${columnId}`}
           sx={{
-            minHeight: 100,
-            '&.droppable': {
-              bgcolor: 'primary.50',
-            },
+            minHeight: 200,
+            p: 1,
+            borderRadius: 2,
+            bgcolor: isOver ? 'action.hover' : 'transparent',
+            border: isOver ? 2 : 1,
+            borderColor: isOver ? 'primary.main' : 'transparent',
+            borderStyle: 'dashed',
+            transition: 'all 0.2s ease',
           }}
         >
-          {tasks.map((task) => (
+          {tasks.filter(task => task != null).map((task) => (
             <TaskCard key={task._id || task.id} task={task} onDelete={onDeleteTask} />
           ))}
+          {tasks.length === 0 && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 100,
+                color: 'text.secondary',
+                fontStyle: 'italic',
+              }}
+            >
+              Drop tasks here
+            </Box>
+          )}
         </Box>
       </SortableContext>
 
@@ -435,6 +385,7 @@ const KanbanColumn = ({ columnId, title, tasks, color, bgColor, borderColor, onA
 
 // Main Kanban Board Component
 const KanbanBoard = ({ projectId, boardId }) => {
+  const theme = useTheme();
   const [activeId, setActiveId] = useState(null);
   const [tasks, setTasks] = useState({ todo: [], 'in-progress': [], review: [], done: [] });
   const [loading, setLoading] = useState(true);
@@ -484,38 +435,53 @@ const KanbanBoard = ({ projectId, boardId }) => {
     })
   );
 
+  const getColumnColors = (theme) => ({
+    todo: {
+      color: theme.palette.text.secondary,
+      bgColor: theme.palette.mode === 'light' ? 'rgba(158, 158, 158, 0.1)' : 'rgba(158, 158, 158, 0.2)',
+      borderColor: theme.palette.mode === 'light' ? 'rgba(158, 158, 158, 0.3)' : 'rgba(158, 158, 158, 0.4)'
+    },
+    'in-progress': {
+      color: theme.palette.primary.main,
+      bgColor: theme.palette.mode === 'light' ? 'rgba(25, 118, 210, 0.1)' : 'rgba(25, 118, 210, 0.2)',
+      borderColor: theme.palette.mode === 'light' ? 'rgba(25, 118, 210, 0.3)' : 'rgba(25, 118, 210, 0.4)'
+    },
+    review: {
+      color: '#ffa726',
+      bgColor: theme.palette.mode === 'light' ? 'rgba(255, 167, 38, 0.1)' : 'rgba(255, 167, 38, 0.2)',
+      borderColor: theme.palette.mode === 'light' ? 'rgba(255, 167, 38, 0.3)' : 'rgba(255, 167, 38, 0.4)'
+    },
+    done: {
+      color: theme.palette.success.main,
+      bgColor: theme.palette.mode === 'light' ? 'rgba(46, 125, 50, 0.1)' : 'rgba(46, 125, 50, 0.2)',
+      borderColor: theme.palette.mode === 'light' ? 'rgba(46, 125, 50, 0.3)' : 'rgba(46, 125, 50, 0.4)'
+    }
+  });
+
   const columns = [
     { 
       id: 'todo', 
       title: 'To Do', 
       tasks: tasks.todo || [], 
-      color: 'hsl(215, 20%, 65%)',
-      bgColor: 'hsl(215, 20%, 95%)',
-      borderColor: 'hsl(215, 20%, 85%)'
+      ...getColumnColors(theme).todo
     },
     { 
       id: 'in-progress', 
       title: 'In Progress', 
       tasks: tasks['in-progress'] || [], 
-      color: 'hsl(217, 91%, 60%)',
-      bgColor: 'hsl(217, 91%, 95%)',
-      borderColor: 'hsl(217, 91%, 85%)'
+      ...getColumnColors(theme)['in-progress']
     },
     { 
       id: 'review', 
       title: 'Need Review', 
       tasks: tasks.review || [], 
-      color: 'hsl(38, 92%, 50%)',
-      bgColor: 'hsl(38, 92%, 95%)',
-      borderColor: 'hsl(38, 92%, 85%)'
+      ...getColumnColors(theme).review
     },
     { 
       id: 'done', 
       title: 'Done', 
       tasks: tasks.done || [], 
-      color: 'hsl(158, 76%, 39%)',
-      bgColor: 'hsl(158, 76%, 95%)',
-      borderColor: 'hsl(158, 76%, 85%)'
+      ...getColumnColors(theme).done
     },
   ];
 
@@ -551,7 +517,7 @@ const KanbanBoard = ({ projectId, boardId }) => {
     
     if (!sourceContainer || !destinationContainer || sourceContainer === destinationContainer) return;
 
-    const taskIndex = tasks[sourceContainer]?.findIndex(task => task.id === active.id);
+    const taskIndex = tasks[sourceContainer]?.findIndex(task => (task._id || task.id) === active.id);
     if (taskIndex === -1) return;
 
     const task = tasks[sourceContainer][taskIndex];
@@ -751,7 +717,7 @@ const KanbanBoard = ({ projectId, boardId }) => {
               task={
                 Object.values(tasks)
                   .flat()
-                  .find((task) => task.id === activeId)
+                  .find((task) => (task._id || task.id) === activeId)
               }
               isDragging
             />

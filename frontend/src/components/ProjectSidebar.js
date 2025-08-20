@@ -15,12 +15,13 @@ import {
   Button,
   Card,
   CardContent,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
   FolderOpen as ProjectIcon,
   People as PeopleIcon,
-  Schedule as TimeIcon,
   Add as AddIcon,
   MoreVert as MoreVertIcon,
   Circle as CircleIcon,
@@ -47,7 +48,9 @@ const statusColors = {
   offline: 'hsl(0, 0%, 65%)',
 };
 
-const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, projects, setProjects, onCreateProject }) => {
+const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, projects, setProjects, onCreateProject, mobileOpen, onMobileClose }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [selectedItem, setSelectedItem] = useState('dashboard');
 
   const menuItems = [
@@ -72,33 +75,18 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, 
     }
   };
 
-  return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: DRAWER_WIDTH,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: DRAWER_WIDTH,
-          boxSizing: 'border-box',
-          bgcolor: 'hsl(240, 40%, 98%)',
-          borderRight: '1px solid hsl(243, 100%, 94%)',
-          boxShadow: '4px 0 16px hsla(243, 82%, 67%, 0.04)',
-        },
-      }}
-    >
-      <Box sx={{ p: 2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-          <Avatar sx={{ 
-            bgcolor: 'hsl(243, 82%, 67%)', 
-            width: 32, 
-            height: 32,
-            boxShadow: '0 4px 16px hsla(243, 82%, 67%, 0.2)',
-          }}>
-            <ProjectIcon />
-          </Avatar>
-          <Typography variant="h6" fontWeight={600} sx={{ color: 'hsl(243, 82%, 25%)' }}>
-            Projects
+  const drawerContent = (
+    <Box sx={{ p: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+        <Avatar sx={{ 
+          bgcolor: 'primary.main', 
+          width: 32, 
+          height: 32,
+        }}>
+          <ProjectIcon />
+        </Avatar>
+        <Typography variant="h6" fontWeight={600} sx={{ color: 'text.primary' }}>
+          Projects
           </Typography>
         </Box>
 
@@ -112,16 +100,16 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, 
                 sx={{
                   borderRadius: 1,
                   mb: 0.5,
-                  color: 'hsl(243, 82%, 35%)',
+                  color: 'text.primary',
                   '&.Mui-selected': {
-                    bgcolor: 'hsl(243, 100%, 97%)',
-                    color: 'hsl(243, 82%, 67%)',
+                    bgcolor: 'action.selected',
+                    color: 'primary.main',
                     '&:hover': {
-                      bgcolor: 'hsl(243, 100%, 96%)',
+                      bgcolor: 'action.hover',
                     },
                   },
                   '&:hover': {
-                    bgcolor: 'hsl(243, 100%, 98%)',
+                    bgcolor: 'action.hover',
                   },
                 }}
               >
@@ -137,17 +125,17 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, 
           ))}
         </List>
 
-        <Divider sx={{ mb: 2, borderColor: 'hsl(243, 100%, 94%)' }} />
+        <Divider sx={{ mb: 2, borderColor: 'divider' }} />
 
         {/* Projects Section */}
         <Box sx={{ mb: 3 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography variant="subtitle2" fontWeight={600} sx={{ color: 'hsl(243, 82%, 55%)' }}>
+            <Typography variant="subtitle2" fontWeight={600} sx={{ color: 'text.secondary' }}>
               Projects
             </Typography>
             <IconButton 
               size="small" 
-              sx={{ color: 'hsl(243, 82%, 67%)' }}
+              sx={{ color: 'primary.main' }}
               onClick={onCreateProject}
               title="Create new project"
             >
@@ -165,11 +153,12 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, 
                     borderRadius: 1,
                     mb: 1,
                     '&.Mui-selected': {
-                      bgcolor: 'hsl(243, 100%, 97%)',
-                      border: '1px solid hsl(243, 100%, 92%)',
+                      bgcolor: 'action.selected',
+                      border: 1,
+                      borderColor: 'primary.main',
                     },
                     '&:hover': {
-                      bgcolor: 'hsl(243, 100%, 98%)',
+                      bgcolor: 'action.hover',
                     },
                   }}
                 >
@@ -372,7 +361,49 @@ const ProjectSidebar = ({ selectedProject, onProjectSelect, onNavigationChange, 
           </CardContent>
         </Card>
       </Box>
-    </Drawer>
+    );
+
+  return (
+    <>
+      {/* Desktop Drawer - Permanent */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: DRAWER_WIDTH,
+          flexShrink: 0,
+          display: { xs: 'none', md: 'flex' },
+          '& .MuiDrawer-paper': {
+            width: DRAWER_WIDTH,
+            boxSizing: 'border-box',
+            bgcolor: 'background.paper',
+            borderRight: 1,
+            borderColor: 'divider',
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+
+      {/* Mobile Drawer - Temporary */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onMobileClose}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': {
+            width: DRAWER_WIDTH,
+            boxSizing: 'border-box',
+            bgcolor: 'background.paper',
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+    </>
   );
 };
 

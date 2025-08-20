@@ -1,9 +1,106 @@
 const Project = require('../models/Project');
 const User = require('../models/User');
 
+// Mock projects data for development
+const mockProjects = [
+  {
+    _id: 'mock_project_1',
+    name: 'Website Redesign',
+    description: 'Complete redesign of company website with modern UI/UX',
+    owner: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    status: 'active',
+    startDate: new Date('2024-01-15'),
+    endDate: new Date('2024-06-15'),
+    color: '#3f51b5',
+    members: [
+      {
+        user: {
+          _id: 'mock_user_1',
+          name: 'John Doe',
+          email: 'john@example.com'
+        },
+        role: 'admin',
+        joinedAt: new Date('2024-01-15')
+      }
+    ],
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
+  },
+  {
+    _id: 'mock_project_2',
+    name: 'Mobile App Development',
+    description: 'Cross-platform mobile application using React Native',
+    owner: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    status: 'planning',
+    startDate: new Date('2024-03-01'),
+    endDate: new Date('2024-09-01'),
+    color: '#4caf50',
+    members: [
+      {
+        user: {
+          _id: 'mock_user_1',
+          name: 'John Doe',
+          email: 'john@example.com'
+        },
+        role: 'admin',
+        joinedAt: new Date('2024-03-01')
+      }
+    ],
+    createdAt: new Date('2024-02-15'),
+    updatedAt: new Date('2024-02-15')
+  },
+  {
+    _id: 'mock_project_3',
+    name: 'API Documentation',
+    description: 'Create comprehensive API documentation and examples',
+    owner: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    status: 'completed',
+    startDate: new Date('2023-11-01'),
+    endDate: new Date('2024-01-01'),
+    color: '#ff9800',
+    members: [
+      {
+        user: {
+          _id: 'mock_user_1',
+          name: 'John Doe',
+          email: 'john@example.com'
+        },
+        role: 'admin',
+        joinedAt: new Date('2023-11-01')
+      }
+    ],
+    createdAt: new Date('2023-10-15'),
+    updatedAt: new Date('2024-01-01')
+  }
+];
+
 // Get all projects for the authenticated user
 const getProjects = async (req, res) => {
   try {
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Return mock projects for the authenticated user
+      const userId = req.user._id || req.user.id;
+      const userProjects = mockProjects.filter(project => 
+        project.owner._id === userId || 
+        project.members.some(member => member.user._id === userId)
+      );
+      return res.json(userProjects);
+    }
+
+    // MongoDB mode - original logic
     const projects = await Project.find({
       $or: [
         { owner: req.user._id },
@@ -24,6 +121,27 @@ const getProjects = async (req, res) => {
 // Get a single project by ID
 const getProjectById = async (req, res) => {
   try {
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      const project = mockProjects.find(p => p._id === req.params.id);
+      
+      if (!project) {
+        return res.status(404).json({ message: 'Project not found' });
+      }
+
+      // Check if user has access to this project
+      const userId = req.user._id || req.user.id;
+      const hasAccess = project.owner._id === userId ||
+                       project.members.some(member => member.user._id === userId);
+
+      if (!hasAccess) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
+
+      return res.json(project);
+    }
+
+    // MongoDB mode - original logic
     const project = await Project.findById(req.params.id)
       .populate('owner', 'name email')
       .populate('members.user', 'name email');
@@ -56,6 +174,39 @@ const createProject = async (req, res) => {
       return res.status(400).json({ message: 'Project name is required' });
     }
 
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      const newProject = {
+        _id: `mock_project_${Date.now()}`,
+        name,
+        description,
+        owner: {
+          _id: req.user._id || req.user.id,
+          name: req.user.name,
+          email: req.user.email
+        },
+        status: 'planning',
+        startDate: startDate ? new Date(startDate) : new Date(),
+        endDate: endDate ? new Date(endDate) : null,
+        color: color || '#3f51b5',
+        members: [{
+          user: {
+            _id: req.user._id || req.user.id,
+            name: req.user.name,
+            email: req.user.email
+          },
+          role: 'admin',
+          joinedAt: new Date()
+        }],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      mockProjects.push(newProject);
+      return res.status(201).json(newProject);
+    }
+
+    // MongoDB mode - original logic
     const project = await Project.create({
       name,
       description,

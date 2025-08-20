@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -24,8 +24,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
-  Divider,
 } from '@mui/material';
 import {
   MoreVert as MoreVertIcon,
@@ -34,7 +32,6 @@ import {
   Delete as DeleteIcon,
   Flag as PriorityIcon,
   CalendarToday as DueDateIcon,
-  CheckCircle as CompletedIcon,
 } from '@mui/icons-material';
 import { tasksAPI } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -58,17 +55,13 @@ const TaskManagement = ({ selectedProject }) => {
   
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchTasks();
-  }, [selectedProject, filter]);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     if (!selectedProject) return;
     
     try {
       setLoading(true);
       const response = await tasksAPI.getByProject(selectedProject._id || selectedProject.id);
-      let filteredTasks = response.data;
+      let filteredTasks = (response.data || []).filter(task => task != null);
       
       // Apply user-specific filters
       if (filter === 'assigned') {
@@ -87,7 +80,11 @@ const TaskManagement = ({ selectedProject }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedProject, filter, user]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleMenuClick = (event, task) => {
     setAnchorEl(event.currentTarget);
@@ -186,42 +183,48 @@ const TaskManagement = ({ selectedProject }) => {
     return colors[status] || colors.todo;
   };
 
-  const TaskCard = ({ task }) => (
-    <Card className="card-modern" sx={{ mb: 2 }}>
-      <CardContent>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="h6" fontWeight={600} sx={{ color: 'hsl(243, 82%, 25%)', mb: 1 }}>
-              {task.title}
-            </Typography>
-            {task.description && (
-              <Typography variant="body2" sx={{ color: 'hsl(243, 82%, 55%)', mb: 2 }}>
-                {task.description}
-              </Typography>
-            )}
-          </Box>
-          <IconButton size="small" onClick={(e) => handleMenuClick(e, task)}>
-            <MoreVertIcon />
-          </IconButton>
-        </Box>
+  const TaskCard = ({ task }) => {
+    // Safety check for undefined task
+    if (!task) {
+      return null;
+    }
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-          <Chip
-            label={task.status.replace('-', ' ')}
-            size="small"
-            sx={{
-              bgcolor: `${getStatusColor(task.status)}20`,
-              color: getStatusColor(task.status),
-              textTransform: 'capitalize',
+    return (
+      <Card className="card-modern" sx={{ mb: 2 }}>
+        <CardContent>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h6" fontWeight={600} sx={{ color: 'hsl(243, 82%, 25%)', mb: 1 }}>
+                {task.title || 'Untitled Task'}
+              </Typography>
+              {task.description && (
+                <Typography variant="body2" sx={{ color: 'hsl(243, 82%, 55%)', mb: 2 }}>
+                  {task.description}
+                </Typography>
+              )}
+            </Box>
+            <IconButton size="small" onClick={(e) => handleMenuClick(e, task)}>
+              <MoreVertIcon />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+            <Chip
+              label={(task.status || 'todo').replace('-', ' ')}
+              size="small"
+              sx={{
+                bgcolor: `${getStatusColor(task.status || 'todo')}20`,
+                color: getStatusColor(task.status || 'todo'),
+                textTransform: 'capitalize',
             }}
           />
           <Chip
-            label={task.priority}
+            label={task.priority || 'medium'}
             size="small"
             icon={<PriorityIcon sx={{ fontSize: 14 }} />}
             sx={{
-              bgcolor: `${getPriorityColor(task.priority)}20`,
-              color: getPriorityColor(task.priority),
+              bgcolor: `${getPriorityColor(task.priority || 'medium')}20`,
+              color: getPriorityColor(task.priority || 'medium'),
               textTransform: 'capitalize',
             }}
           />
@@ -272,7 +275,8 @@ const TaskManagement = ({ selectedProject }) => {
         </Box>
       </CardContent>
     </Card>
-  );
+    );
+  };
 
   return (
     <Box sx={{ p: 3 }}>
@@ -312,7 +316,7 @@ const TaskManagement = ({ selectedProject }) => {
           {loading ? (
             <Typography>Loading tasks...</Typography>
           ) : tasks.length > 0 ? (
-            tasks.map((task) => (
+            tasks.filter(task => task != null).map((task) => (
               <TaskCard key={task._id || task.id} task={task} />
             ))
           ) : (

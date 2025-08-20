@@ -1,11 +1,115 @@
 const Task = require('../models/Task');
 const Project = require('../models/Project');
 
+// Mock tasks data for development
+const mockTasks = [
+  {
+    _id: 'mock_task_1',
+    title: 'Design Homepage Layout',
+    description: 'Create wireframes and mockups for the new homepage design',
+    project: 'mock_project_1',
+    status: 'in-progress',
+    priority: 'high',
+    assignedTo: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    createdBy: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    dueDate: new Date('2024-02-15'),
+    position: 1,
+    tags: ['design', 'ui'],
+    createdAt: new Date('2024-01-20'),
+    updatedAt: new Date('2024-01-25')
+  },
+  {
+    _id: 'mock_task_2',
+    title: 'Implement User Authentication',
+    description: 'Set up login, registration, and password reset functionality',
+    project: 'mock_project_1',
+    status: 'todo',
+    priority: 'high',
+    assignedTo: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    createdBy: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    dueDate: new Date('2024-02-20'),
+    position: 2,
+    tags: ['backend', 'security'],
+    createdAt: new Date('2024-01-22'),
+    updatedAt: new Date('2024-01-22')
+  },
+  {
+    _id: 'mock_task_3',
+    title: 'Setup Database Schema',
+    description: 'Design and implement the database structure for the application',
+    project: 'mock_project_1',
+    status: 'done',
+    priority: 'medium',
+    assignedTo: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    createdBy: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    dueDate: new Date('2024-01-30'),
+    position: 3,
+    tags: ['database', 'backend'],
+    createdAt: new Date('2024-01-18'),
+    updatedAt: new Date('2024-01-28')
+  },
+  {
+    _id: 'mock_task_4',
+    title: 'Create React Components',
+    description: 'Build reusable React components for the mobile app',
+    project: 'mock_project_2',
+    status: 'in-progress',
+    priority: 'medium',
+    assignedTo: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    createdBy: {
+      _id: 'mock_user_1',
+      name: 'John Doe',
+      email: 'john@example.com'
+    },
+    dueDate: new Date('2024-03-15'),
+    position: 1,
+    tags: ['frontend', 'react'],
+    createdAt: new Date('2024-03-01'),
+    updatedAt: new Date('2024-03-05')
+  }
+];
+
 // Get all tasks for a project
 const getTasksByProject = async (req, res) => {
   try {
     const { projectId } = req.params;
 
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Mock mode - find tasks for this project
+      const projectTasks = mockTasks.filter(task => task.project === projectId);
+      return res.json(projectTasks);
+    }
+
+    // MongoDB mode - original logic
     // Check if project exists and user has access
     const project = await Project.findById(projectId);
     if (!project) {
@@ -34,6 +138,18 @@ const getTasksByProject = async (req, res) => {
 // Get a single task by ID
 const getTaskById = async (req, res) => {
   try {
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      const task = mockTasks.find(t => t._id === req.params.id);
+      
+      if (!task) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+
+      return res.json(task);
+    }
+
+    // MongoDB mode - original logic
     const task = await Task.findById(req.params.id)
       .populate('assignedTo', 'name email')
       .populate('createdBy', 'name email')
@@ -54,7 +170,7 @@ const getTaskById = async (req, res) => {
 
     res.json(task);
   } catch (error) {
-    console.error('Get task error:', error);
+    console.error('Get task by ID error:', error);
     res.status(500).json({ message: error.message });
   }
 };

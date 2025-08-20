@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -11,6 +11,7 @@ import {
   Divider,
   Card,
   CardContent,
+  useTheme,
 } from '@mui/material';
 import {
   Visibility,
@@ -24,6 +25,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const theme = useTheme();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -32,8 +34,15 @@ const Login = () => {
   const [name, setName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   
-  const { login, register, loading, error } = useAuth();
+  const { login, register, loading, error, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  // Redirect away if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -44,20 +53,25 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    if (loading) return; // prevent double submit
+
+    const email = formData.email.trim();
+    const password = formData.password.trim();
+    if (!email || !password || (isRegister && !name.trim())) return;
+
     let result;
     if (isRegister) {
       result = await register({
-        name,
-        email: formData.email,
-        password: formData.password,
+        name: name.trim(),
+        email,
+        password,
       });
     } else {
-      result = await login(formData);
+      result = await login({ email, password });
     }
 
     if (result.success) {
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     }
   };
 
@@ -65,7 +79,7 @@ const Login = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(252, 82%, 67%) 100%)',
+        bgcolor: 'background.default',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -78,10 +92,11 @@ const Login = () => {
           className="card-glassmorphism"
           sx={{
             backdropFilter: 'blur(20px)',
-            backgroundColor: 'hsla(0, 0%, 100%, 0.95)',
+            bgcolor: 'background.paper',
             borderRadius: 3,
-            border: '1px solid hsla(0, 0%, 100%, 0.2)',
-            boxShadow: '0 32px 64px hsla(243, 82%, 67%, 0.12)',
+            border: 1,
+            borderColor: 'divider',
+            boxShadow: 3,
           }}
         >
           <CardContent sx={{ p: 4 }}>
@@ -95,12 +110,12 @@ const Login = () => {
                   width: 64,
                   height: 64,
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(252, 82%, 67%) 100%)',
+                  bgcolor: 'primary.main',
                   mb: 2,
-                  boxShadow: '0 8px 32px hsla(243, 82%, 67%, 0.3)',
+                  boxShadow: 2,
                 }}
               >
-                <TaskAlt sx={{ fontSize: 32, color: 'hsl(0, 0%, 100%)' }} />
+                <TaskAlt sx={{ fontSize: 32, color: 'primary.contrastText' }} />
               </Box>
               <Typography
                 variant="h4"
@@ -108,15 +123,12 @@ const Login = () => {
                 gutterBottom
                 sx={{
                   fontWeight: 700,
-                  background: 'linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(252, 82%, 67%) 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent',
+                  color: 'primary.main',
                 }}
               >
                 TaskFlow
               </Typography>
-              <Typography variant="body1" sx={{ color: 'hsl(243, 82%, 35%)' }}>
+              <Typography variant="body1" sx={{ color: 'text.secondary' }}>
                 {isRegister
                   ? 'Create your account to get started'
                   : 'Welcome back! Sign in to your account'}
@@ -143,7 +155,7 @@ const Login = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AccountCircle sx={{ color: 'hsl(243, 82%, 67%)' }} />
+                        <AccountCircle sx={{ color: 'primary.main' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -163,7 +175,7 @@ const Login = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Email sx={{ color: 'hsl(243, 82%, 67%)' }} />
+                      <Email sx={{ color: 'primary.main' }} />
                     </InputAdornment>
                   ),
                 }}
@@ -182,7 +194,7 @@ const Login = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Lock sx={{ color: 'hsl(243, 82%, 67%)' }} />
+                      <Lock sx={{ color: 'primary.main' }} />
                     </InputAdornment>
                   ),
                   endAdornment: (
@@ -190,7 +202,7 @@ const Login = () => {
                       <IconButton
                         onClick={() => setShowPassword(!showPassword)}
                         edge="end"
-                        sx={{ color: 'hsl(243, 82%, 67%)' }}
+                        sx={{ color: 'primary.main' }}
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -203,17 +215,17 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                disabled={loading}
+                disabled={loading || !formData.email || !formData.password || (isRegister && !name)}
                 className="button-primary-modern"
                 sx={{
                   py: 1.5,
                   mb: 3,
-                  background: 'linear-gradient(135deg, hsl(243, 82%, 67%) 0%, hsl(252, 82%, 67%) 100%)',
+                  bgcolor: 'primary.main',
                   fontSize: '1rem',
                   fontWeight: 600,
                   boxShadow: '0 8px 32px hsla(243, 82%, 67%, 0.3)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, hsl(243, 82%, 57%) 0%, hsl(252, 82%, 57%) 100%)',
+                    bgcolor: 'primary.dark',
                     boxShadow: '0 12px 40px hsla(243, 82%, 67%, 0.4)',
                   },
                 }}
@@ -225,8 +237,8 @@ const Login = () => {
                   : 'Sign In'}
               </Button>
 
-              <Divider sx={{ my: 3, borderColor: 'hsl(243, 100%, 94%)' }}>
-                <Typography variant="body2" sx={{ color: 'hsl(243, 82%, 55%)' }}>
+              <Divider sx={{ my: 3, borderColor: 'divider' }}>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   OR
                 </Typography>
               </Divider>
@@ -237,10 +249,10 @@ const Login = () => {
                 onClick={() => setIsRegister(!isRegister)}
                 sx={{
                   py: 1.5,
-                  color: 'hsl(243, 82%, 67%)',
+                  color: 'primary.main',
                   fontWeight: 500,
                   '&:hover': {
-                    bgcolor: 'hsl(243, 100%, 97%)',
+                    bgcolor: 'action.hover',
                   },
                 }}
               >
@@ -252,23 +264,6 @@ const Login = () => {
           </CardContent>
         </Card>
 
-        {/* Features */}
-        <Box sx={{ mt: 4, textAlign: 'center' }}>
-          <Typography variant="body2" sx={{ color: 'hsla(0, 0%, 100%, 0.8)', mb: 2 }}>
-            Trusted by teams worldwide
-          </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4 }}>
-            {['Project Management', 'Team Collaboration', 'Task Tracking'].map((feature) => (
-              <Typography
-                key={feature}
-                variant="body2"
-                sx={{ color: 'hsla(0, 0%, 100%, 0.7)' }}
-              >
-                {feature}
-              </Typography>
-            ))}
-          </Box>
-        </Box>
       </Container>
     </Box>
   );

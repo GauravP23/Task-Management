@@ -34,10 +34,8 @@ api.interceptors.response.use(
       // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      // Only redirect if not already on login page
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
-      }
+      // Let the AuthContext handle the redirect to prevent loops
+      console.warn('Authentication token expired. Please log in again.');
     }
     
     return Promise.reject(error);

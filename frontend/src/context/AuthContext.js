@@ -48,10 +48,10 @@ const authReducer = (state, action) => {
 };
 
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('token'),
-  user: JSON.parse(localStorage.getItem('user') || 'null'),
-  token: localStorage.getItem('token'),
-  loading: false,
+  isAuthenticated: false, // Start as false, will be set by useEffect
+  user: null,
+  token: null,
+  loading: true, // Start as loading to prevent flicker
   error: null,
 };
 
@@ -61,38 +61,36 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in on app start
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      checkAuthStatus();
+    const userString = localStorage.getItem('user');
+    
+    if (token && userString) {
+      try {
+        const user = JSON.parse(userString);
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: { user, token },
+        });
+      } catch (error) {
+        console.error('Failed to parse stored user data:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
     }
+    // Done loading initial auth state
+    dispatch({ type: 'SET_LOADING', payload: false });
   }, []);
 
-  const checkAuthStatus = async () => {
-    try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await authAPI.getProfile();
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: {
-          user: response.data,
-          token: localStorage.getItem('token'),
-        },
-      });
-    } catch (error) {
-      localStorage.removeItem('token');
-      dispatch({ type: 'LOGOUT' });
-    } finally {
-      dispatch({ type: 'SET_LOADING', payload: false });
-    }
-  };
 
   const login = async (credentials) => {
     try {
       dispatch({ type: 'LOGIN_START' });
+      
       const response = await authAPI.login(credentials);
       const { token, ...user } = response.data;
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: { user, token },

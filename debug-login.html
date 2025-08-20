@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        input, button { padding: 10px; margin: 5px 0; width: 100%; }
+        .log { background: #f0f0f0; padding: 10px; margin: 10px 0; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Debug Authentication</h1>
+        
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" value="john@example.com" />
+            <input type="password" id="password" placeholder="Password" value="password123" />
+            <button type="submit">Login</button>
+        </form>
+        
+        <button onclick="checkLocalStorage()">Check LocalStorage</button>
+        <button onclick="testProfile()">Test Profile API</button>
+        <button onclick="clearAuth()">Clear Auth</button>
+        
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            logDiv.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+            console.log(message);
+        }
+        
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            log('🚀 Starting login...');
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                log('📡 Response status: ' + response.status);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log('✅ Login successful: ' + JSON.stringify(data, null, 2));
+                    
+                    // Store in localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data));
+                    
+                    log('💾 Stored in localStorage');
+                    checkLocalStorage();
+                    
+                } else {
+                    const errorData = await response.json();
+                    log('❌ Login failed: ' + JSON.stringify(errorData));
+                }
+                
+            } catch (error) {
+                log('💥 Network error: ' + error.message);
+            }
+        });
+        
+        function checkLocalStorage() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            log('🗄️ LocalStorage check:');
+            log('Token exists: ' + !!token);
+            log('User exists: ' + !!user);
+            
+            if (token) {
+                log('Token preview: ' + token.substring(0, 50) + '...');
+            }
+            if (user) {
+                log('User data: ' + user);
+            }
+        }
+        
+        async function testProfile() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                log('❌ No token found for profile test');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/profile', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                
+                log('👤 Profile API status: ' + response.status);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log('✅ Profile data: ' + JSON.stringify(data, null, 2));
+                } else {
+                    const errorData = await response.json();
+                    log('❌ Profile failed: ' + JSON.stringify(errorData));
+                }
+                
+            } catch (error) {
+                log('💥 Profile error: ' + error.message);
+            }
+        }
+        
+        function clearAuth() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            log('🧹 Cleared authentication data');
+        }
+        
+        // Initial check
+        log('🔍 Debug page loaded');
+        checkLocalStorage();
+    </script>
+</body>
+</html>

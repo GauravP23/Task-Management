@@ -16,24 +16,24 @@ export const createModernTheme = (mode = 'light') => createTheme({
       contrastText: 'hsl(0, 0%, 100%)',
     },
     background: {
-      default: mode === 'light' ? 'hsl(210, 40%, 98%)' : 'hsl(222, 84%, 5%)',
-      paper: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(217, 33%, 17%)',
+      default: mode === 'light' ? 'hsl(210, 40%, 98%)' : 'hsl(0, 0%, 0%)', // True black for dark mode
+      paper: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(0, 0%, 5%)', // Very dark grey for paper
     },
     text: {
-      primary: mode === 'light' ? 'hsl(217, 33%, 17%)' : 'hsl(210, 40%, 95%)',
-      secondary: mode === 'light' ? 'hsl(215, 25%, 45%)' : 'hsl(214, 20%, 65%)',
+      primary: mode === 'light' ? 'hsl(217, 33%, 17%)' : 'hsl(0, 0%, 95%)', // Light text for dark mode
+      secondary: mode === 'light' ? 'hsl(215, 25%, 45%)' : 'hsl(0, 0%, 70%)', // Softer light text
     },
     grey: {
-      50: 'hsl(210, 40%, 98%)',
-      100: 'hsl(210, 40%, 95%)',
-      200: 'hsl(214, 32%, 91%)',
-      300: 'hsl(213, 27%, 84%)',
-      400: 'hsl(214, 20%, 65%)',
-      500: 'hsl(215, 25%, 45%)',
-      600: 'hsl(215, 19%, 35%)',
-      700: 'hsl(215, 25%, 27%)',
-      800: 'hsl(217, 33%, 17%)',
-      900: 'hsl(222, 84%, 5%)',
+      50: mode === 'light' ? 'hsl(210, 40%, 98%)' : 'hsl(0, 0%, 95%)',
+      100: mode === 'light' ? 'hsl(210, 40%, 95%)' : 'hsl(0, 0%, 85%)',
+      200: mode === 'light' ? 'hsl(214, 32%, 91%)' : 'hsl(0, 0%, 75%)',
+      300: mode === 'light' ? 'hsl(213, 27%, 84%)' : 'hsl(0, 0%, 65%)',
+      400: mode === 'light' ? 'hsl(214, 20%, 65%)' : 'hsl(0, 0%, 55%)',
+      500: mode === 'light' ? 'hsl(215, 25%, 45%)' : 'hsl(0, 0%, 45%)',
+      600: mode === 'light' ? 'hsl(215, 19%, 35%)' : 'hsl(0, 0%, 35%)',
+      700: mode === 'light' ? 'hsl(215, 25%, 27%)' : 'hsl(0, 0%, 25%)',
+      800: mode === 'light' ? 'hsl(217, 33%, 17%)' : 'hsl(0, 0%, 15%)',
+      900: mode === 'light' ? 'hsl(222, 84%, 5%)' : 'hsl(0, 0%, 5%)',
     },
     success: {
       main: 'hsl(158, 76%, 39%)', // Clean emerald green
@@ -57,8 +57,8 @@ export const createModernTheme = (mode = 'light') => createTheme({
     },
     // Custom colors for modern UI elements
     surface: {
-      elevated: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(217, 33%, 22%)',
-      overlay: mode === 'light' ? 'hsl(210, 40%, 96%)' : 'hsl(217, 33%, 14%)',
+      elevated: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(0, 0%, 8%)', // Slightly elevated from true black
+      overlay: mode === 'light' ? 'hsl(210, 40%, 96%)' : 'hsl(0, 0%, 3%)', // Very dark overlay
     },
     // Enhanced status colors with HSL
     status: {
@@ -237,16 +237,17 @@ export const createModernTheme = (mode = 'light') => createTheme({
       styleOverrides: {
         root: {
           borderRadius: 12,
-          border: `1px solid ${mode === 'light' ? 'hsl(214, 32%, 91%)' : 'hsl(215, 25%, 27%)'}`,
+          border: `1px solid ${mode === 'light' ? 'hsl(214, 32%, 91%)' : 'hsl(0, 0%, 20%)'}`,
+          backgroundColor: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(0, 0%, 8%)',
           boxShadow: mode === 'light'
             ? '0 1px 3px 0 hsla(220, 25%, 10%, 0.08), 0 1px 2px -1px hsla(220, 25%, 10%, 0.08)'
-            : '0 1px 3px 0 hsla(220, 25%, 5%, 0.2), 0 1px 2px -1px hsla(220, 25%, 5%, 0.2)',
+            : '0 1px 3px 0 hsla(0, 0%, 0%, 0.4), 0 1px 2px -1px hsla(0, 0%, 0%, 0.4)',
           transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            borderColor: mode === 'light' ? 'hsl(213, 27%, 84%)' : 'hsl(215, 19%, 35%)',
+            borderColor: mode === 'light' ? 'hsl(213, 27%, 84%)' : 'hsl(0, 0%, 30%)',
             boxShadow: mode === 'light'
               ? '0 4px 6px -1px hsla(220, 25%, 10%, 0.08), 0 2px 4px -2px hsla(220, 25%, 10%, 0.08)'
-              : '0 4px 6px -1px hsla(220, 25%, 5%, 0.2), 0 2px 4px -2px hsla(220, 25%, 5%, 0.2)',
+              : '0 4px 6px -1px hsla(0, 0%, 0%, 0.6), 0 2px 4px -2px hsla(0, 0%, 0%, 0.6)',
             transform: 'translateY(-1px)',
           },
         },
@@ -302,12 +303,13 @@ export const createModernTheme = (mode = 'light') => createTheme({
       styleOverrides: {
         paper: {
           border: 'none',
-          background: mode === 'light' 
-            ? 'linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 99%) 100%)'
-            : 'linear-gradient(180deg, hsl(217, 33%, 17%) 0%, hsl(217, 33%, 14%) 100%)',
+          backgroundColor: mode === 'light' 
+            ? 'hsl(0, 0%, 100%)'
+            : 'hsl(0, 0%, 3%)', // Very dark for sidebar
+          borderRight: `1px solid ${mode === 'light' ? 'hsl(214, 32%, 91%)' : 'hsl(0, 0%, 15%)'}`,
           boxShadow: mode === 'light'
             ? '0 10px 15px -3px hsla(220, 25%, 10%, 0.08), 0 4px 6px -4px hsla(220, 25%, 10%, 0.08)'
-            : '0 10px 15px -3px hsla(220, 25%, 5%, 0.2), 0 4px 6px -4px hsla(220, 25%, 5%, 0.2)',
+            : '0 10px 15px -3px hsla(0, 0%, 0%, 0.4), 0 4px 6px -4px hsla(0, 0%, 0%, 0.4)',
         },
       },
     },

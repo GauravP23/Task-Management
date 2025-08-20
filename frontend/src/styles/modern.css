@@ -5,6 +5,37 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 600px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .container-responsive {
+    padding: 8px !important;
+  }
+  
+  .text-responsive {
+    font-size: 0.875rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+  
+  .sidebar-mobile {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
 /* Smooth scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -28,15 +59,15 @@
 
 /* Dark mode scrollbars */
 [data-theme="dark"] ::-webkit-scrollbar-track {
-  background: hsl(217, 33%, 17%);
+  background: hsl(0, 0%, 10%);
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: hsl(215, 19%, 35%);
+  background: hsl(0, 0%, 30%);
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-  background: hsl(215, 19%, 45%);
+  background: hsl(0, 0%, 40%);
 }
 
 /* Modern focus styles */
@@ -46,7 +77,30 @@
   border-radius: 4px;
 }
 
-/* Status indicator styles */
+/* Dark mode status indicators */
+[data-theme="dark"] .status-todo {
+  color: hsl(215, 20%, 75%) !important;
+  background-color: hsl(215, 20%, 15%) !important;
+  border-color: hsl(215, 20%, 25%) !important;
+}
+
+[data-theme="dark"] .status-in-progress {
+  color: hsl(217, 91%, 70%) !important;
+  background-color: hsl(217, 91%, 15%) !important;
+  border-color: hsl(217, 91%, 25%) !important;
+}
+
+[data-theme="dark"] .status-review {
+  color: hsl(38, 92%, 60%) !important;
+  background-color: hsl(38, 92%, 15%) !important;
+  border-color: hsl(38, 92%, 25%) !important;
+}
+
+[data-theme="dark"] .status-done {
+  color: hsl(158, 76%, 49%) !important;
+  background-color: hsl(158, 76%, 15%) !important;
+  border-color: hsl(158, 76%, 25%) !important;
+}
 .status-todo {
   color: hsl(215, 20%, 65%) !important;
   background-color: hsl(215, 20%, 95%) !important;
@@ -92,6 +146,27 @@
   background-color: hsl(0, 84%, 95%) !important;
 }
 
+/* Dark mode priority styles */
+[data-theme="dark"] .priority-low {
+  color: hsl(215, 20%, 75%) !important;
+  background-color: hsl(215, 20%, 15%) !important;
+}
+
+[data-theme="dark"] .priority-medium {
+  color: hsl(38, 92%, 60%) !important;
+  background-color: hsl(38, 92%, 15%) !important;
+}
+
+[data-theme="dark"] .priority-high {
+  color: hsl(25, 95%, 63%) !important;
+  background-color: hsl(25, 95%, 15%) !important;
+}
+
+[data-theme="dark"] .priority-urgent {
+  color: hsl(0, 84%, 70%) !important;
+  background-color: hsl(0, 84%, 15%) !important;
+}
+
 /* Modern glassmorphism effects */
 .glass-effect {
   background: hsla(0, 0%, 100%, 0.8);
@@ -101,8 +176,8 @@
 }
 
 [data-theme="dark"] .glass-effect {
-  background: hsla(217, 33%, 17%, 0.8);
-  border: 1px solid hsla(215, 19%, 35%, 0.2);
+  background: hsla(0, 0%, 5%, 0.8);
+  border: 1px solid hsla(0, 0%, 20%, 0.2);
 }
 
 /* Modern animations */
@@ -199,7 +274,7 @@
 }
 
 [data-theme="dark"] .border-modern {
-  border-color: hsl(215, 25%, 27%);
+  border-color: hsl(0, 0%, 20%);
 }
 
 .border-primary {
@@ -249,17 +324,21 @@
 }
 
 [data-theme="dark"] .shadow-sm {
-  box-shadow: 0 1px 3px 0 hsla(220, 25%, 5%, 0.2), 0 1px 2px -1px hsla(220, 25%, 5%, 0.2);
+  box-shadow: 0 1px 3px 0 hsla(0, 0%, 0%, 0.4), 0 1px 2px -1px hsla(0, 0%, 0%, 0.4);
 }
 
 [data-theme="dark"] .shadow-md {
-  box-shadow: 0 4px 6px -1px hsla(220, 25%, 5%, 0.2), 0 2px 4px -2px hsla(220, 25%, 5%, 0.2);
+  box-shadow: 0 4px 6px -1px hsla(0, 0%, 0%, 0.4), 0 2px 4px -2px hsla(0, 0%, 0%, 0.4);
 }
 
 [data-theme="dark"] .shadow-lg {
-  box-shadow: 0 10px 15px -3px hsla(220, 25%, 5%, 0.2), 0 4px 6px -4px hsla(220, 25%, 5%, 0.2);
+  box-shadow: 0 10px 15px -3px hsla(0, 0%, 0%, 0.4), 0 4px 6px -4px hsla(0, 0%, 0%, 0.4);
 }
 
 [data-theme="dark"] .shadow-xl {
-  box-shadow: 0 20px 25px -5px hsla(220, 25%, 5%, 0.2), 0 8px 10px -6px hsla(220, 25%, 5%, 0.2);
+  box-shadow: 0 20px 25px -5px hsla(0, 0%, 0%, 0.4), 0 8px 10px -6px hsla(0, 0%, 0%, 0.4);
+}
+
+[data-theme="dark"] .hover-lift:hover {
+  box-shadow: 0 8px 16px -4px hsla(0, 0%, 0%, 0.6), 0 6px 12px -2px hsla(0, 0%, 0%, 0.6);
 }
