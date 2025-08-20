@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -58,7 +58,7 @@ const teamMembers = [
   { id: 6, name: 'Mike Johnson', avatar: 'MJ', color: '#FF9FF3' },
 ];
 
-const CreateTaskModal = ({ open, onClose, onSubmit, columnId }) => {
+const CreateTaskModal = ({ open, onClose, onSubmit, columnId, existingTask = null, isEdit = false }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -71,6 +71,39 @@ const CreateTaskModal = ({ open, onClose, onSubmit, columnId }) => {
   });
 
   const [newTag, setNewTag] = useState('');
+
+  useEffect(() => {
+    console.log('📝 CreateTaskModal - useEffect triggered:', { isEdit, existingTask, columnId });
+    
+    if (isEdit && existingTask) {
+      console.log('🔄 Setting form data for edit:', existingTask);
+      setFormData({
+        title: existingTask.title || '',
+        description: existingTask.description || '',
+        priority: existingTask.priority || 'medium',
+        status: (existingTask.status === 'completed' ? 'done' : existingTask.status) || columnId || 'todo',
+        stage: existingTask.stage || '',
+        assignees: existingTask.assignees || [],
+        dueDate: existingTask.dueDate ? existingTask.dueDate.substring(0,10) : '',
+        tags: existingTask.tags || [],
+        id: existingTask._id || existingTask.id,
+        _id: existingTask._id || existingTask.id,
+      });
+    } else if (!isEdit) {
+      // reset when switching back to create mode
+      console.log('🆕 Resetting form for create mode');
+      setFormData({
+        title: '',
+        description: '',
+        priority: 'medium',
+        status: columnId || 'todo',
+        stage: '',
+        assignees: [],
+        dueDate: '',
+        tags: [],
+      });
+    }
+  }, [isEdit, existingTask, columnId]);
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -97,16 +130,30 @@ const CreateTaskModal = ({ open, onClose, onSubmit, columnId }) => {
   };
 
   const handleSubmit = () => {
-    if (formData.title.trim()) {
-      onSubmit({
+    console.log('📝 CreateTaskModal - Submit clicked:', { formData, isEdit });
+    
+    if (!formData.title.trim()) {
+      console.warn('❌ Empty title, cannot submit');
+      return;
+    }
+    
+    if (isEdit) {
+      console.log('🔄 Submitting edit:', formData);
+      onSubmit({ ...formData });
+    } else {
+      const newTask = {
         ...formData,
-        id: Date.now().toString(), // Generate temporary ID
+        id: `task-${Date.now()}`,
+        _id: `task-${Date.now()}`,
         progress: 0,
         comments: 0,
         attachments: 0,
-      });
-      handleClose();
+        createdAt: new Date().toISOString(),
+      };
+      console.log('🆕 Submitting new task:', newTask);
+      onSubmit(newTask);
     }
+    handleClose();
   };
 
   const handleClose = () => {
@@ -136,7 +183,7 @@ const CreateTaskModal = ({ open, onClose, onSubmit, columnId }) => {
     >
       <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
         <Typography variant="h6" fontWeight={600}>
-          Create New Task
+          {isEdit ? 'Edit Task' : 'Create New Task'}
         </Typography>
         <IconButton onClick={handleClose} size="small">
           <CloseIcon />
@@ -323,7 +370,7 @@ const CreateTaskModal = ({ open, onClose, onSubmit, columnId }) => {
           variant="contained"
           disabled={!formData.title.trim()}
         >
-          Create Task
+          {isEdit ? 'Update Task' : 'Create Task'}
         </Button>
       </DialogActions>
     </Dialog>
