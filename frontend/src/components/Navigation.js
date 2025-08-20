@@ -148,7 +148,19 @@ const Navigation = () => {
             </Box>
           )}
 
-          <IconButton color="inherit" onClick={toggleDarkMode} sx={{ mr: 1 }}>
+          <IconButton 
+            color="inherit" 
+            onClick={toggleDarkMode} 
+            sx={{ 
+              mr: 1,
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                transform: 'scale(1.1)',
+              }
+            }}
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
             {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
 

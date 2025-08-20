@@ -178,10 +178,50 @@ const getTaskById = async (req, res) => {
 // Create a new task
 const createTask = async (req, res) => {
   try {
-    const { title, description, project, assignedTo, priority, dueDate, tags } = req.body;
+    const { title, description, project, assignedTo, priority, dueDate, tags, status } = req.body;
 
-    if (!title || !project) {
-      return res.status(400).json({ message: 'Title and project are required' });
+    if (!title) {
+      return res.status(400).json({ message: 'Title is required' });
+    }
+
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Mock mode - create a mock task
+      const newTask = {
+        _id: `mock_task_${Date.now()}`,
+        id: `mock_task_${Date.now()}`,
+        title,
+        description: description || '',
+        project: project || 'mock_project_1',
+        status: status || 'todo',
+        priority: priority || 'medium',
+        assignedTo: assignedTo ? {
+          _id: 'mock_user_1',
+          name: 'Current User',
+          email: 'user@example.com'
+        } : null,
+        createdBy: {
+          _id: 'mock_user_1',
+          name: 'Current User',
+          email: 'user@example.com'
+        },
+        dueDate: dueDate ? new Date(dueDate) : null,
+        position: mockTasks.length + 1,
+        tags: tags || [],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      // Add to mock tasks array
+      mockTasks.push(newTask);
+      
+      console.log('✅ Mock task created:', newTask);
+      return res.status(201).json(newTask);
+    }
+
+    // MongoDB mode - original logic
+    if (!project) {
+      return res.status(400).json({ message: 'Project is required' });
     }
 
     // Check if project exists and user has access
@@ -238,8 +278,44 @@ const createTask = async (req, res) => {
 // Update a task
 const updateTask = async (req, res) => {
   try {
-    const { title, description, assignedTo, priority, dueDate, tags } = req.body;
+    const { title, description, assignedTo, priority, dueDate, tags, status } = req.body;
 
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Mock mode - update task in mock array
+      const taskIndex = mockTasks.findIndex(task => task._id === req.params.id);
+      
+      if (taskIndex === -1) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+
+      // Update the task
+      const updatedTask = {
+        ...mockTasks[taskIndex],
+        title: title || mockTasks[taskIndex].title,
+        description: description !== undefined ? description : mockTasks[taskIndex].description,
+        priority: priority || mockTasks[taskIndex].priority,
+        status: status || mockTasks[taskIndex].status,
+        dueDate: dueDate ? new Date(dueDate) : mockTasks[taskIndex].dueDate,
+        tags: tags || mockTasks[taskIndex].tags,
+        updatedAt: new Date()
+      };
+
+      if (assignedTo) {
+        updatedTask.assignedTo = {
+          _id: 'mock_user_1',
+          name: 'Current User',
+          email: 'user@example.com'
+        };
+      }
+
+      mockTasks[taskIndex] = updatedTask;
+      
+      console.log('✅ Mock task updated:', updatedTask);
+      return res.json(updatedTask);
+    }
+
+    // MongoDB mode - original logic
     const task = await Task.findById(req.params.id).populate('project');
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
@@ -285,10 +361,31 @@ const updateTaskStatus = async (req, res) => {
   try {
     const { status } = req.body;
 
-    if (!['todo', 'in-progress', 'review', 'completed'].includes(status)) {
+    if (!['todo', 'in-progress', 'review', 'completed', 'done'].includes(status)) {
       return res.status(400).json({ message: 'Invalid status' });
     }
 
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Mock mode - update status in mock array
+      const taskIndex = mockTasks.findIndex(task => task._id === req.params.id);
+      
+      if (taskIndex === -1) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+
+      // Update the task status
+      mockTasks[taskIndex] = {
+        ...mockTasks[taskIndex],
+        status,
+        updatedAt: new Date()
+      };
+      
+      console.log('✅ Mock task status updated:', mockTasks[taskIndex]);
+      return res.json(mockTasks[taskIndex]);
+    }
+
+    // MongoDB mode - original logic
     const task = await Task.findById(req.params.id).populate('project');
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
@@ -362,6 +459,23 @@ const updateTaskPosition = async (req, res) => {
 // Delete a task
 const deleteTask = async (req, res) => {
   try {
+    // Check if we're in mock mode
+    if (!global.isMongoConnected) {
+      // Mock mode - delete from mock array
+      const taskIndex = mockTasks.findIndex(task => task._id === req.params.id);
+      
+      if (taskIndex === -1) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+
+      // Remove the task
+      mockTasks.splice(taskIndex, 1);
+      
+      console.log('✅ Mock task deleted:', req.params.id);
+      return res.json({ message: 'Task deleted successfully' });
+    }
+
+    // MongoDB mode - original logic
     const task = await Task.findById(req.params.id).populate('project');
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });

@@ -692,7 +692,12 @@ const KanbanBoard = ({ projectId, boardId }) => {
         status: statusMap[columnId] || columnId,
         id: taskData.id || `task-${Date.now()}`,
         _id: taskData._id || taskData.id || `task-${Date.now()}`,
+        // Convert assignees array to single assignedTo for API compatibility
+        assignedTo: taskData.assignees && taskData.assignees.length > 0 ? taskData.assignees[0].id : null,
       };
+
+      // Remove assignees from API data since backend uses assignedTo
+      delete newTaskData.assignees;
 
       console.log('📤 Sending task data:', newTaskData);
 
@@ -709,7 +714,9 @@ const KanbanBoard = ({ projectId, boardId }) => {
         createdTask = {
           ...newTaskData,
           createdAt: new Date().toISOString(),
-          assignees: newTaskData.assignees || [],
+          // Convert back assignedTo to assignees for frontend compatibility
+          assignees: taskData.assignees || [],
+          assignedTo: newTaskData.assignedTo,
           comments: 0,
           attachments: 0,
           progress: 0
@@ -754,6 +761,12 @@ const KanbanBoard = ({ projectId, boardId }) => {
       // Prepare task data for API
       const apiTask = { ...updatedTask };
       if (apiTask.status === 'done') apiTask.status = 'completed';
+      
+      // Convert assignees to assignedTo for API compatibility
+      if (apiTask.assignees && apiTask.assignees.length > 0) {
+        apiTask.assignedTo = apiTask.assignees[0].id;
+      }
+      delete apiTask.assignees;
       
       // Update local state immediately
       setTasks(prev => {
